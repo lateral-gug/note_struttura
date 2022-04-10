@@ -1,0 +1,2779 @@
+\documentclass[a4paper]{report}
+\setlength{\columnsep}{0.70 cm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[T1]{fontenc}
+%\usepackage[sc]{mathpazo}
+\usepackage{fourier}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{upgreek}
+\usepackage{sidecap}
+\usepackage{hyperref}
+\usepackage{subfig}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{caption}
+\captionsetup{tableposition=top,figureposition=bottom,font=small}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[figure]{font=small}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage{multicol}
+\usepackage{microtype}
+\usepackage{mwe} % for blindtext and example-image-a in example
+\usepackage{wrapfig}
+\usepackage{verbatim}
+\usepackage{titlepic}
+\usepackage{graphicx}
+
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand\impongo{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\sffamily !}}}{=}}}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norma}{\lVert}{\rVert}
+
+\title{Note di Struttura della Materia}
+\author{g.p.}
+\date{}
+% \titlepic{\includegraphics[width=\textwidth]{julia5.jpg}}
+
+\begin{document}
+
+\maketitle
+
+
+% \chapter*{}
+% riviste e corrette da v.l. \\
+% discusse e ragionate con v.l., v.m.b., j.b., i.c., t.m., f.l., t.b.m. \\
+% febbraio-giugno 2022 \\
+% buon compleanno Stefano
+
+% \clearpage
+
+\tableofcontents
+
+\chapter{Concetti di termodinamica}
+\section{Particelle in una scatola}
+Consideriamo un sistema di particelle non-interagenti in una scatola cubica di lato $L$. L'equazione di Schr\"{o}dinger della singola particella è quella di un corpo puntiforme confinato da un potenziale che si può schematizzare come nullo nella scatola e infinito fuori: 
+\begin{equation}
+    \left(-\frac{\hbar^2}{2m}\nabla^2 + V(\mathbf{x})\right)\psi(\mathbf{x)} = E\,\psi(\mathbf{x})
+\end{equation}
+con 
+\[
+    V(\mathbf{x})=\left\{
+                \begin{array}{ll}
+                  0 \,\,\,\qquad\text{dentro}\\
+                 +\infty\qquad \text{fuori}
+                \end{array}
+              \right.
+\]
+
+Le autofunzioni elementari saranno onde piane di energia fissata e condizioni al contorno periodiche:
+\begin{equation}
+    \mathcal{E}_q = \frac{\hbar^2q^2}{2m} \qquad \psi(0) = \psi(L)
+\end{equation}
+e dalle condizioni di periodicità vale
+\begin{equation}
+    q_i = \frac{2\pi}{L}l_i\qquad l_i = 0,\pm 1,\pm 2...
+\end{equation}
+Gli $l_i$ nel loro insieme identificano il livello energetico. Per legare proprietà macroscopiche e microscopiche del sistema dobbiamo considerare interazioni e \textbf{transizioni di fase} all'interno del sistema stesso; assumeremo dunque che le particelle interagiscano \textit{abbastanza} da permettere queste transizioni e \textit{abbastanza poco} da non compromettere la struttura dei livelli energetici imperturbati. 
+\section{Le variabili termodinamiche}
+Consideriamo un sistema isolato di energia totale $E$ fissata; ci sono moltissimi modi per distribuire l'energia tra le parti del sistema e i loro stati. Nella trattazione assumeremo che il sistema si trovi all'equilibrio, i.e. che siano irrilevanti le condizioni iniziali, e che all'equilibrio tutti i microstati siano equiprobabili; non c'è alcuna ragione fisica per cui un particolare stato dovrebbe essere privilegiato. Nonostante ciò, è intuitivo che i microstati in cui una particella detiene l'energia dell'intero sistema saranno enormemente minori in numero degli stati in cui l'energia è distribuita circa equamente tra le particelle. Detto $\Gamma$ il  numero totale dei microstati a energia $E$, definiamo l'entropia
+\begin{equation}
+    S \equiv k \log\Gamma
+    \label{entropia}
+\end{equation}
+dove $k$ è la costante di Boltzmann
+\begin{equation}
+    k = 1.380649 \times 10^{-23} \,\,\text{J/K} \quad \text{(valore esatto)}
+\end{equation}
+L'entropia è un quantificatore del disordine interno al sistema. Sarà funzione delle variabili termodinamiche energia, volume e numero di particelle; è ovvio che il numero di microstati $\Gamma$ aumenti con $E$, quindi l'entropia sarà una funzione monotona dell'energia. Assumiamo quindi che sia invertibile e derivabile per scrivere l'energia come forma differenziale:
+\begin{equation}
+    \mathrm{d}E = \left(\frac{\partial E}{\partial S}\right)_{N,V}\mathrm{d}S + \left(\frac{\partial E}{\partial V}\right)_{S,N}\mathrm{d}V +\left(\frac{\partial E}{\partial N}\right)_{S,V}\mathrm{d}N
+\end{equation}
+oppure
+\begin{equation}
+    \mathrm{d}E = T\,\mathrm{d}S - P\,\mathrm{d}V +\mu\,\mathrm{d}N
+    \label{denergia}
+\end{equation}
+dove abbiamo usato le definizioni note di temperatura, pressione e potenziale chimico.
+\section{Un esperimento mentale}
+Vogliamo ora verificare che la nostra definizione matematica di temperatura sia in accordo coi principi primi della termodinamica: avviciniamo due sottosistemi capaci di scambiare energia se messi a contatto, che partano isolati con energie $E_1$ ed $E_2$ e numeri di microstati $\Gamma_1$ e $\Gamma_2$. Nella configurazione iniziale, ad ogni microstato dell'uno si possono abbinare tutti i microstati dell'altro; il numero totale di microstati del sistema sarà
+\begin{equation}
+    \Gamma = \Gamma_1 \Gamma_2
+\end{equation}
+e l'entropia di conseguenza 
+\begin{equation}
+    S = S_1 + S_2
+\end{equation}
+Quando i sottosistemi vengono in contatto, cominciano a scambiarsi energia. Ognuno dei due occuperà energie $E_{1}^{\alpha}$, $E_{2}^{\alpha}$; otterremo il conteggio totale dei microstati disponibili sommando sulle energie che ogni sottosistema può assumere durante il contatto:
+\begin{equation}
+    \Gamma = \sum_{\alpha}\Gamma_{1}^{\alpha}\Gamma_{2}^{\alpha}
+\end{equation}
+Allontaniamo i sottosistemi; a quali energie finali ci aspettiamo di trovarli? Emerge da argomenti statistici che sarà probabile trovarli nella configurazione $\alpha$ che massimizza la \textit{molteplicità}, ovvero il prodotto $\Gamma_1\Gamma_2$. In effetti, per grandi numeri (tipicamente abbiamo $N \sim 10^{23}$) questa configurazione sarà estremamente più probabile di tutte le altre messe insieme, al punto da poter trascurare la possibilità che il sistema si trovi in una di queste. \\
+Nell'esperimento mentale non sono variati né il volume né il numero di particelle nei sottosistemi; possiamo quindi riscrivere la \eqref{denergia} come
+\begin{equation}
+    \delta E_1 = T_1 \,\delta S_1 \qquad \delta E_2 = T_2\, \delta S_2
+\end{equation}
+L'energia totale è conservata; inoltre ipotizziamo che il sistema non sia mai uscito fuori equilibrio, e che quindi non sia variata l'entropia:
+\begin{equation}
+    \delta E_1 + \delta E_2 = 0 \qquad \delta S_1 + \delta S_2 = 0
+\end{equation}
+Mettendo insieme le ultime equazioni troviamo che in questo caso 
+\begin{equation}
+    T_1 = T_2
+\end{equation}
+coerentemente con la definizione operativa di temperatura. Imponendo variazioni di entropia nel contatto troveremo che i sottosistemi vorranno tendere alla stessa temperatura. Un argomento matematicamente identico si può fare, \textit{mutatis mutandis}, per la pressione e per il potenziale chimico. \\
+
+Risulta conveniente nella trattazione di sistemi termodinamici liberarsi della variabile energia; tramite le definizioni delle altre variabili termodinamiche possiamo ricondurci ad una funzione di stato del tipo
+\begin{equation}
+    P = f(T,V,N)
+\end{equation}
+Nello studio degli stati della materia ci allontaneremo da questo formalismo a fissa energia; ci proponiamo infatti di studiare tramite gli strumenti della meccanica statistica sistemi non-isolati a temperatura fissata, caratterizzati da una funzione di densità $\rho(E)$ che descriva la distribuzione dei microstati in funzione dell'energia.
+
+\section{Principi fondamentali}
+
+Consideriamo una trasformazione adiabatica, i.e. una trasformazione che avviene senza scambio di calore: a scopo illustrativo immaginiamo un gas in un cilindro che può essere compresso tramite un pistone. Dal \textit{primo principio della termodinamica} abbiamo che vale
+\begin{equation}
+    \mathrm{d}E = \mathrm{d}L + \mathrm{d}Q
+\end{equation}
+e per definizioni di lavoro e pressione
+\begin{equation}
+    \mathrm{d}L = F\mathrm\,{d}x = \frac{F}{A}\,A\,\mathrm{d}x = -P\, \mathrm{d}V
+\end{equation}
+da cui otteniamo infine
+\begin{equation}
+    \left(\frac{\partial E}{\partial V}\right)_{\delta Q = 0} = -P = \left(\frac{\partial E}{\partial V}\right)_{\delta S = 0}
+\end{equation}
+Ne segue che per una trasformazione adiabatica l'entropia non varia. Microscopicamente, riducendo o aumentando il volume cambiano le energie dei microstati, ma non la distribuzione degli atomi nei microstati stessi.\\
+
+Il \textit{secondo principio della termodinamica} afferma che l'entropia di un sistema isolato lontano dall'equilibrio termico tende ad aumentare nel tempo, finché l'equilibrio non è raggiunto:
+\begin{equation}
+    \frac{\mathrm{d}S}{\mathrm{d}t} \geq 0
+\end{equation}
+questo principio formalizza il concetto di \textit{freccia del tempo} ed implica naturalmente l'irreversibilità dei processi non-adiabatici. \\
+
+Il \textit{terzo principio} afferma che un sistema a temperatura nulla ha entropia nulla; lo stato fondamentale è, di conseguenza, mai degenere:
+\begin{equation}
+    \Gamma = 1\,\, \rightarrow \,\,S = 0
+\end{equation}
+
+\section{I potenziali termodinamici}
+Prima di introdurre alcune funzioni utili nella trattazione statistica dei sistemi, introduciamo il concetto di \textit{grandezza estensiva}, i.e. che scala con le dimensioni del sistema (e.g. $S$,$V$,$E$) e, viceversa, di \textit{grandezza intensiva}, che non dipende dalla scala del sistema (come $T$ e $P$). Per propria natura, grandezze come l'entropia non sono facilmente misurabili o trattabili; per questo ed altri motivi è comodo introdurre alcuni funzionali ausiliari derivabili dall'energia e dagli altri potenziali tramite trasformate di Legendre:
+\paragraph{Energia libera di Helmholtz}
+\begin{equation}
+    F \equiv E - TS 
+\end{equation}
+\begin{equation}
+    \mathrm{d}F = -P\,\mathrm{d}V - S\,\mathrm{d}T
+\end{equation}
+La variazione di $F$ a temperatura costante è uguale al lavoro compiuto sul sistema:
+\begin{equation}
+    \delta F |_T = -P \delta V |_T = \delta L
+\end{equation}
+\paragraph{Energia libera di Gibbs} adatta a descrivere transizioni di fase.
+\begin{equation}
+    \Phi \equiv E - TS + PV = F + PV
+\end{equation}
+\begin{equation}
+    \mathrm{d}F = -S\,\mathrm{d}T +V\,\mathrm{d}P
+\end{equation}
+\paragraph{Entalpia}
+\begin{equation}
+   W \equiv E + PV
+\end{equation}
+\begin{equation}
+    \mathrm{d}W = T\,\mathrm{d}S +V\,\mathrm{d}P
+\end{equation}
+La variazione di entalpia a pressione costante è uguale al calore scambiato dal sistema:
+\begin{equation}
+    \delta W |_P = T \,\delta S |_P = \delta Q
+\end{equation}
+
+Valgono alcune identità comode tra le variabili termodinamiche fondamentali, dette  \textit{relazioni di Maxwell}:
+\begin{equation}
+    \left(\frac{\partial T}{\partial V}\right)_S = -\left(\frac{\partial P}{\partial S}\right)_V \qquad \left(\frac{\partial V}{\partial S}\right)_P = \left(\frac{\partial T}{\partial P}\right)_S 
+\end{equation}
+\begin{equation}
+    \left(\frac{\partial S}{\partial P}\right)_T = -\left(\frac{\partial V}{\partial T}\right)_P \qquad \left(\frac{\partial P}{\partial T}\right)_V = \left(\frac{\partial S}{\partial V}\right)_T
+\end{equation}
+
+Se ora includiamo la possibilità che il numero di particelle possa variare, va aggiunta ai potenziali una dipendenza da $N$, identificata dal potenziale chimico
+\begin{equation}
+    \mu = \left(\frac{\partial E}{\partial N}\right)_{SV} = \left(\frac{\partial F}{\partial N}\right)_{TV} = \left(\frac{\partial \Phi}{\partial N}\right)_{SP}
+\end{equation}
+che è esso stesso, effettivamente, un potenziale termodinamico; in forma differenziale:
+\begin{equation}
+    \mathrm{d}\mu = - \frac{S}{N} \, \mathrm{d}T + \frac{V}{N} \, \mathrm{d}P \equiv - s \,\mathrm{d}T + v \, \mathrm{d}P
+\end{equation}
+dove ho definito il volume medio e l'entropia media per una singola particella. Il potenziale chimico rappresenta l'energia aggiunta o rimossa al sistema al variare del numero di particelle: se aggiungo particelle ferme, sarà ragionevole avere un $\mu$ negativo, in quanto l'energia media a disposizione della singola particella diminuirà con $N$.\\
+Come ultimo appunto introduciamo il cosiddetto \textbf{potenziale di Landau}
+\begin{equation}
+    \Omega \equiv F - \mu N
+\end{equation}
+\begin{equation}
+    \mathrm{d}\Omega = -S\,\mathrm{d}T - P\,\mathrm{d}V -N\,\mathrm{d}\mu
+\end{equation}
+
+\section{Sistema in un bagno termico (1)}
+
+L'Universo è un sistema isolato (si provi a dimostrare il contrario). Dividiamo l'Universo stesso in due parti: il sistemino che ci proponiamo di studiare, che istantaneamente è caratterizzato da variabili $(E,S,T)$, e tutto ciò che lo circonda, che tratteremo come un grande \textit{bagno termico} sempre all'equilibrio ed alla stessa temperatura del sistemino, identificato da $(E',S',T)$. La variazione di energia del bagno termico dipende solo dalla variazione di entropia; inoltre, se l'Universo è davvero un sistema isolato, la variazione totale di energia al suo interno sarà nulla. Queste due affermazioni si traducono matematicamente in
+\begin{equation}
+    \delta E' = T\,\delta S'\qquad \,\, \delta E + \delta E' = 0
+\end{equation}
+da cui
+\begin{equation}
+    \delta S' = -\frac{\delta E}{T}
+\end{equation}
+Ora scriviamo il secondo principio come
+\begin{equation}
+    \delta S + \delta S' \geq 0
+\end{equation}
+da cui infine otteniamo
+\begin{equation}
+    T\,\delta S - \delta E \geq 0 \rightarrow \delta (E-TS) \geq 0 \rightarrow \delta F \leq 0
+\end{equation}
+A parole: in un sistema a temperatura fissata si ha l'equilibrio quando l'energia libera di Helmholtz è al minimo. Se il sistema scambia particelle con il bagno, con un ragionamento analogo, si ottiene $\delta \Omega \leq 0$: l'equilibrio corrisponde al minimo del potenziale di Landau.
+
+\section{Altre quantità rilevanti}
+
+È necessario introdurre alcune altre quantità importanti nella termodinamica. I \textbf{calori specifici} a volume costante e a pressione costante sono
+\begin{equation}
+    c_V = T \left(\frac{\partial S}{\partial T}\right)_V = \left(\frac{\partial E}{\partial T}\right)_V \qquad 
+    c_P = T \left(\frac{\partial S}{\partial T}\right)_P = \left(\frac{\partial E}{\partial T}\right)_P
+\end{equation}
+o equivalentemente
+\begin{equation}
+    c_V = - T\left(\frac{\partial^2F}{\partial T^2}\right)_V \qquad c_P = - T\left(\frac{\partial^2\Phi}{\partial T^2}\right)_P
+\end{equation}
+Sono coefficienti che identificano le relazioni lineari tra variazioni di temperatura e di calore, del tipo $\delta Q \propto c\,\delta T$, diversi a seconda del tipo di trasformazione. \\
+
+La variazione di volume a fissato lavoro è invece chiamata \textit{compressibilità}, e per una trasformazione isoterma vale
+\begin{equation}
+    k_T = -\frac{1}{V}\left(\frac{\partial V}{\partial P }\right)_T = -\frac{1}{V}\left(\frac{\partial^2 \Phi }{\partial P^2 }\right)_T  
+\end{equation}
+Nel caso di una trasformazione adiabatica è invece definita da
+\begin{equation}
+    k_S = -\frac{1}{V}\left(\frac{\partial V}{\partial P }\right)_S = \left[V\left(\frac{\partial^2 E }{\partial V^2 }\right)_S\right]^{-1}
+\end{equation}
+Manovrando le diverse relazioni si ottiene per i calori specifici 
+\begin{equation}
+    c_P-c_V = T\left(\frac{\partial V}{\partial T}\right)_P\left(\frac{\partial P}{\partial T}\right)_V = V T \,k_T\left[\left(\frac{\partial P}{\partial T}\right)_V\right]^2 \geq 0
+\end{equation}
+da cui $c_P \geq c_V$.
+
+\section{Diagrammi di fase}
+
+Un diagramma di fase è uno strumento grafico che visualizza lo stato fisico di una sostanza in funzione di due variabili, e.g. temperatura e pressione. Le curve di coesistenza, che delimitano lo spazio del piano riservato alle diverse fasi, si possono determinare così: supponiamo di osservare un sistema con due stati coesistenti, che si scambiano particelle mantenendo fisso il numero totale $N_1+N_2$. Se siamo all'equilibrio varrà
+\begin{equation}
+    \frac{\partial F}{\partial N_1} = \frac{\partial}{\partial N_1}(F_1+F_2) = \frac{\partial F_1}{\partial N_1}-\frac{\partial F_2}{\partial N_2} = \mu_1 - \mu_2 = 0
+\end{equation}
+da cui la relazione
+\begin{equation}
+ \mu_1(P,T) = \mu_2(P,T)
+\end{equation}
+che identifica una curva $P=f(T)$ sul piano degli stati. Ripetendo il lavoro per un terzo stato, si può trovare l'intersezione delle due curve ottenute, detta punto triplo, in cui tre stati coesistono in equilibrio. Inoltre per due fasi all'equilibrio vale
+\begin{equation}
+    \mathrm{d}\mu_1 = \mathrm{d}\mu_2 \,\,\rightarrow\,\, -s_1\,\mathrm{d}T +v_1 \,\mathrm{d}P = -s_2\,\mathrm{d}T +v_2 \,\mathrm{d}P 
+\end{equation}
+da cui otteniamo 
+\begin{equation}
+    \frac{\mathrm{d}P}{\mathrm{d}T} = \frac{s_2-s_1}{v_2-v_1}
+\end{equation}
+Tipicamente un gas sarà più disordinato e meno denso di un liquido. Se definiamo il calore latente $L \equiv T(s_2-s_1)$, la precedente diventa
+\begin{equation}
+    \frac{\mathrm{d}P}{\mathrm{d}T} = \frac{L}{T(v_2-v_1)}
+\end{equation}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{phasediag.png}
+    \caption{Esempio di diagramma di fase. La linea verde tratteggiata mostra il comportamento anomalo dell'acqua.}
+    \label{phasediag}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.2]{phase_water.png}
+    \caption{Diagramma di fase dell'acqua.}
+    \label{phase_water}
+\end{figure}
+
+\chapter{Meccanica statistica}
+
+\section{Sistema in un bagno termico (2)}
+
+Ripartiamo considerando il sistema $\mathcal{S}$ a cui siamo interessati come una piccola parte di un sistema Universo $\mathcal{S}_0$; la parte complementare al sistemino è un \textit{bagno termico} $\mathcal{S}'$ a temperatura costante e sempre all'equilibrio. La dipendenza dalle variabili termodinamiche è esplicitata nella notazione
+\begin{equation}
+    \mathcal{S}(V,N,E,S)\qquad \mathcal{S}_0(V_0,N_0,E_0,S_0) \qquad
+    \mathcal{S}'(V',N',E',S')
+\end{equation}
+Detto $\Gamma_0$ il numero totali di microstati dell'Universo all'equilibrio, si ha, per una qualsiasi entropia dell'Universo $S_t$ 
+\begin{equation}
+    S_t \leq S_0 = k \log \Gamma_0
+\end{equation}
+e l'energia del bagno termico è
+\begin{equation}
+    \mathrm{d}E' = T \mathrm{d}S' - P\mathrm{d}V' + \mu \mathrm{d}N'
+\end{equation}
+Supponiamo ora che il sistema $\mathcal{S}$ si trovi in uno stato quantistico identificato da una serie $\alpha$ di numeri quantici, e che il volume del sistema sia fissato. Inoltre richiediamo che sia 
+\begin{equation}
+    E_\alpha \ll E_0 \qquad N_\alpha \ll N_0
+    \label{approx1}
+\end{equation}
+In questa approssimazione temperatura e potenziale chimico del bagno termico sono fissati. I microstati del sistema Universo sono tutti equiprobabili poiché esso è sempre all'equilibrio; ipotizzando il sistemino nello stato $\alpha$ fuori equilibrio, otteniamo
+\begin{equation}
+    w_{EQ} = \frac{1}{\Gamma_0} \,\,\rightarrow\,\, w_\alpha = \frac{\Gamma_\alpha'}{\Gamma_0}
+\end{equation}
+da cui deriva che il valor medio sugli stati di una qualsiasi variabile $f$ sarà
+\begin{equation}
+    \langle f\rangle = \sum_\alpha w_\alpha f_\alpha \qquad \sum_\alpha w_\alpha = 1
+\end{equation}
+Da qui ricaviamo l'entropia del bagno termico:
+\begin{equation}
+    S_\alpha' = k \log \Gamma_\alpha' = S'(E_0 - E_\alpha, N_0 - N_\alpha)
+\end{equation}
+\begin{equation}
+    S_0 - S_\alpha' = -k \log \frac{\Gamma_\alpha'}{\Gamma_0} = -k\log w_\alpha
+\end{equation}
+e quindi
+\begin{equation}
+    w_\alpha = \exp\left(-\frac{S_0 - S_\alpha'}{k}\right) = A\exp\left(\frac{S_\alpha'}{k}\right)
+    \label{pesi_entropia}
+\end{equation}
+L'entropia del sistemino non è ben definita, in quanto non siamo all'equilibrio; ciononostante possiamo calcolarne un valor medio:
+\begin{equation}
+    \langle S\rangle = S_0 - \langle S_\alpha'\rangle = -k \sum_\alpha w_\alpha \log w_\alpha  
+    \label{avgentropy}
+\end{equation}
+
+\section{Funzioni di partizione}
+
+Sviluppiamo in serie, nelle ipotesi \eqref{approx1}, l'entropia del bagno termico:
+\begin{equation}
+    S_\alpha' \approx S'(E_0,N_0) - \left(\frac{\partial S'}{\partial E'}\right)_{N'} E_\alpha  - \left(\frac{\partial S'}{\partial N'}\right)_{E'} N_\alpha
+\end{equation}
+\begin{equation}
+    S_\alpha' = \text{cost.} - \frac{E_\alpha-\mu N_\alpha}{T}
+\end{equation}
+da cui infine, normalizzando a dovere, otteniamo un'espressione alla Boltzmann per i pesi:
+\begin{equation}
+    w_\alpha = \ddfrac{\exp\left[-(E_\alpha-\mu N_\alpha)/k T\right]}{\sum_\alpha \exp\left[-(E_\alpha-\mu N_\alpha)/k T \right]} = \frac{1}{\mathcal{L}}\exp\left(-\frac{E_\alpha-\mu N_\alpha}{k T}\right)
+\end{equation}
+dove si è definita la \textit{funzione di granpartizione}
+\begin{equation}
+    \mathcal{L} \equiv \sum_\alpha \exp\left(-\frac{E_\alpha-\mu N_\alpha}{k T}\right)
+    \label{granpartizione}
+\end{equation}
+che è la generalizzazione della già nota \textit{funzione di partizione}
+\begin{equation}
+    \mathcal{Z} = \sum_\alpha \exp\left(-\frac{E_\alpha}{k T}\right)
+    \label{partizione}
+\end{equation}
+e che ci dà tutta l'informazione necessaria a studiare le proprietà statistiche dei sistemi.
+\section{Relazioni con le funzioni di partizione}
+Inserendo la \eqref{granpartizione} nella \eqref{avgentropy} otteniamo per il valore di aspettazione dell'entropia
+\begin{equation}
+\begin{split}
+    \langle S\rangle  & = -k\sum_\alpha w_\alpha \log w_\alpha \\ 
+    & = k \log \mathcal{L} + \frac{1}{T}\sum_\alpha w_\alpha E_\alpha - \frac{\mu}{T}\sum_\alpha w_\alpha N_\alpha \\
+    & = k \log \mathcal{L} + \frac{\langle E \rangle-\mu \langle N \rangle}{T}
+\end{split}
+\end{equation}
+e per il potenziale di Landau (nel terzo passaggio si impone $N_\alpha = N \,\,\forall \alpha$)
+\begin{equation}
+    \begin{split}
+        \Omega & = -k T \log \mathcal{L}\\
+        & = -k T \log\sum_\alpha \exp\left(-\frac{E_\alpha-\mu N_\alpha}{k T}\right) \\
+        & = -\mu N - k T \log\sum_\alpha \exp \left(-\frac{E_\alpha}{k T}\right) \\
+        & = -\mu N - k T \log \mathcal{Z}
+    \end{split}
+\end{equation}
+da cui si ricava immediatamente l'energia libera di Helmholtz
+\begin{equation}
+    \begin{split}
+        F & = \Omega + \mu N \\
+        & = -kT \log \sum_\alpha \exp \left(-\frac{E_\alpha}{k T}\right) \\
+        & = -kT \log \mathcal{Z}
+    \end{split}
+\end{equation}
+
+Se consideriamo il caso in cui vari stati occupano lo stesso livello energetico, i pesi associati ad un particolare livello si scrivono
+
+\begin{equation}
+    w(E_\alpha) = \frac{1}{\mathcal{Z}} \,\rho(E_\alpha)\, \exp \left(-\frac{E_\alpha}{k T}\right)
+\end{equation}
+dove $\rho$ è la degenerazione associata al livello energetico. Per stati continui, $E_\alpha \rightarrow \mathcal{E}$, e l'espressione di sopra si traduce immediatamente in
+
+\begin{equation}
+    w(E_\alpha) \rightarrow w(\mathcal{E}) = \frac{1}{\mathcal{Z}} \, \rho(\mathcal{E})\,\exp \left(-\frac{\mathcal{E}}{k T}\right)
+    \label{pesi1}
+\end{equation}
+
+\begin{equation}
+    \mathcal{Z} \rightarrow \int_0^\infty \rho(\mathcal{E}) \,\mathrm{d}\mathcal{E}  \exp \left(-\frac{\mathcal{E}}{k T}\right)
+\end{equation}
+Il problema si è ridotto quindi a trovare la \textit{densità di stati} $\rho(\mathcal{E})$, che è la funzione di distribuzione dei microstati nell'energia:
+\begin{equation}
+    \mathrm{d}\Gamma = \frac{\mathrm{d}\Gamma}{\mathrm{d}\mathcal{E}} \,\mathrm{d}\mathcal{E} = \rho(\mathcal{E}) \,\mathrm{d}\mathcal{E}
+\end{equation}
+Appunto alcune altre relazioni importanti tra le variabili termodinamiche e la funzione di partizione nel caso a $N$ fisso:
+\begin{equation}
+    S = -\frac{\partial F}{\partial T} = k\log \mathcal{Z} + \frac{k T}{\mathcal{Z}}\frac{\mathrm{d}\mathcal{Z}}{\mathrm{d}T}
+\end{equation}
+
+\begin{equation}
+    P = -\frac{\partial F}{\partial V} = \frac{k T}{\mathcal{Z}}\frac{\mathrm{d}\mathcal{Z}}{\mathrm{d}V}
+\end{equation}
+
+\begin{equation}
+    E = F + TS = \frac{k T^2}{\mathcal{Z}}\frac{\partial \mathcal{Z}}{\partial T}
+\end{equation}
+
+\begin{equation}
+    N = - \frac{\partial \Omega}{\partial \mu} = \frac{k T}{\mathcal{L}} \frac{\partial \mathcal{L}}{\partial \mu}
+\end{equation}
+
+\section{Particelle non interagenti}
+
+Per un sistema ad $N$ particelle non interagenti, ogni grado di libertà contribuisce all'energia indipendentemente dagli altri. Se ad esempio $E_\alpha = H_i + G_j$ vale
+\begin{equation}
+    \mathcal{Z} = \sum_{i,j} \exp \left(-\frac{H_i + G_j}{k T}\right) = \mathcal{Z}_H \mathcal{Z}_G
+\end{equation}
+quindi la funzione di partizione fattorizza sui gdl; per funzioni di partizione di $N$ particelle distinguibili (i.e. per cui distribuzioni di microstati diverse identificano stati diversi)
+\begin{equation}
+    \mathcal{Z} = \mathcal{Z}_1^N
+\end{equation}
+quindi ci basta conoscere la funzione di partizione di singola particella per trattare le proprietà statistiche dell'intero sistema.
+
+Per trattare particelle identiche, poniamoci nell'ipotesi che l'energia media per singola particella $\langle \mathcal{E}\rangle = E/N$ sia molto grande, i.e. caso di alte temperature, o basse densità, o più in generale di non-interazione; in queste condizioni è altamente improbabile che due particelle occupino lo stesso stato quantistico: per $N$ particelle si avranno dunque a disposizione $\sim N$ stati, ed $N!$ modi di distribuzione dei microstati sulle particelle. Ma le particelle sono per ipotesi indistinguibili, quindi, a macrostato fissato, non importa la distribuzione dei microstati, ed per calcolare $\mathcal{Z}$ si deve contare ogni macrostato una volta sola. La funzione di partizione si aggiusta quindi scrivendo
+\begin{equation}
+    \mathcal{Z} = \frac{1}{N!}\,\mathcal{Z}_1^N
+\end{equation}
+L'energia libera diventa:
+\begin{equation}
+    F = -N k T \log \mathcal{Z}_1 + k T \log N!
+\end{equation}
+da cui, ricordando la dipendenza dell'energia dal volume tramite l'impulso
+\begin{equation}
+    \mathcal{E}_q = \frac{\hbar^2 q^2}{2 m} \qquad q_i = \frac{2 \pi l_i}{L} \quad \rightarrow \quad \mathcal{E}_q \propto L^{-2} = V^{-2/3}
+\end{equation}
+possiamo calcolare la pressione in funzione dell'energia media $\langle\mathcal{E}\rangle$ di singola particella:
+\begin{equation}
+    \begin{split}
+        P & = -\left(\frac{\partial F}{\partial V}\right)_T = \frac{N k T}{\mathcal{Z}_1}\frac{\partial\mathcal{Z}_1}{\partial V} \\
+        & = -\frac{N k T}{\mathcal{Z}_1}\frac{1}{k T}\sum_{q}\frac{\partial \mathcal{E}_{q}}{\partial V}\,\exp\left(-\frac{\mathcal{E}_{q}}{k T}\right) \\
+        & = - \frac{2 N}{3 V} \, \frac{1}{\mathcal{Z}_1}\sum_{q}\mathcal{E}_{q}\,\exp\left(-\frac{\mathcal{E}_{q}}{k T}\right) \\
+        & = -\frac{2 N}{3 V} \langle\mathcal{E}\rangle
+    \end{split}
+\end{equation}
+che si traduce al continuo scrivendo
+
+\begin{equation}
+    \langle \mathcal{E} \rangle = \ddfrac{\int_0^\infty \rho(\mathcal{E})\, \mathrm{d}\mathcal{E}\,\mathcal{E}\exp(\mathcal{E}/kT)}{\int_0^\infty \rho(\mathcal{E})\, \mathrm{d}\mathcal{E}\,\exp(\mathcal{E}/kT)}
+\end{equation}
+
+\section{Gas ideale (1)} \label{gas_ideale_1}
+
+Formalizziamo il concetto di gas ideale illustrato prima. Consideriamo particelle confinate in una scatola etichettando l'autostato dell'energia tramite l'impulso $q$ e indicando con $n(q)$ il numero di particelle nello stato stesso. Il potenziale di Landau di singola particella in particolare stato sarà
+\begin{equation}
+    \Omega_{q} = -k T \log \mathcal{L}_{q} = -k T \log \sum_{q}\exp \left(\ddfrac{\mathcal{E}_{q} n_q - \mu\, n_q}{k T}\right)
+\end{equation}
+e dal momento che la funzione di granpartizione fattorizza sugli stati il potenziale totale si otterrà sommando sugli stati stessi:
+\begin{equation}
+    \mathcal{L} = \prod_q \mathcal{L}_q \quad\rightarrow \quad \Omega = \sum_q \Omega_q
+\end{equation}
+Nelle ipotesi di gas ideale, la stragrande maggioranza degli stati non sarà occupata da alcuna particella, e sarà altamente improbabile trovare due particelle nello stesso stato. Matematicamente, detta $w(n_q)$ la probabilità di trovare $n_q$ particelle nello stato $q$, varrà
+
+\begin{equation}
+    w(0) \sim 1 \qquad w(1) \sim \text{piccola} \qquad w(2,3,4...) \sim 0
+    \label{ipotesi1}
+\end{equation}
+D'altronde le probabilità sono date da
+
+\begin{equation}
+    w_\alpha = \frac{1}{\mathcal{L}} \exp \left(\ddfrac{E_\alpha - \mu N_\alpha}{k T}\right)
+\end{equation}
+e usando
+
+\begin{equation}
+    \Omega = -k T \log \mathcal{L} 
+\end{equation}
+si trova
+
+\begin{equation}
+    w(n_q) = \exp\left[\ddfrac{\Omega_q - n_q(\mathcal{E}_q-\mu)}{k T}\right]
+\end{equation}
+Le ipotesi \eqref{ipotesi1} si traducono così in
+
+\begin{equation}
+    w_{0} = \exp \left(\frac{\Omega_q}{k T}\right) \approx 1
+\end{equation}
+
+\begin{equation}
+    w_{1} = \exp \left(\frac{\Omega_q}{k T}\right) \exp \left(-\frac{\mathcal{E}_q - \mu}{k T}\right) \approx \exp \left(-\frac{\mathcal{E}_q - \mu}{k T}\right)
+\end{equation}
+
+\begin{equation}
+    w_{N} = w_{1}^{N} \approx 0
+\end{equation}
+La condizione affinché queste valgano su tutti gli stati (e di conseguenza la condizione più forte di gas perfetto) è
+
+\begin{equation}
+    \exp\left(\frac{\mu}{k T}\right) \ll 1 \qquad (\mu \rightarrow -\infty)
+\end{equation}
+Dalla forma dei pesi possiamo calcolare il numero medio di particelle in uno stato:
+
+\begin{equation}
+\begin{split}
+    \langle n_q \rangle  & = \ddfrac{\sum_{n_{q}} \,n_q\, \exp(-n_q(\mathcal{E}_q-\mu)/k T)}{\sum_{n_{q}}  \exp(-n_q(\mathcal{E}_q-\mu)/k T)}\\
+    & \approx \exp\left(-\frac{\mathcal{E}_q-\mu}{k T}\right)
+\end{split}
+\label{statclassica}
+\end{equation}
+trovando la definizione di \textit{statistica classica}.\\
+Calcolando il potenziale di Landau ritroviamo l'equazione di stato dei gas perfetti:
+
+\begin{equation}
+    \begin{split}
+        \Omega_q & \approx -k T \log \left(1+\exp\left(-\frac{\mathcal{E}_q-\mu}{k T}\right)\right) \\
+        & = -k T \log \left(1+\langle n_q \rangle\right)\\
+        & \approx -k T \langle n_q \rangle
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \Omega \approx -k T \sum_q \langle n_q \rangle = - kTN \qquad \qquad \Omega = -PV
+\end{equation}
+
+\begin{equation}
+    \implies PV = kNT
+    \label{gasperfetti}
+\end{equation}
+
+\section{Sistema a due stati}
+
+Come esempio applicativo, consideriamo un sistema di $N$ particelle distinguibili a spin $1/2$ in campo magnetico costante. Consideriamo solo i gradi di libertà legati allo spin; il termine di interazione dell'Hamiltoniana si scrive
+
+\begin{equation}
+    H_B = - \boldsymbol{\mu}\cdot \mathbf{B} = \pm \mu B
+\end{equation}
+associando in modo arbitrario il segno $+$ con lo spin su $\uparrow$ ed il segno $-$ con lo spin giù $\downarrow$. Per la funzione di partizione basta sommare sui due stati della singola particella:
+
+\begin{equation}
+    \mathcal{Z}_1 = e^{\mu B/k T} + e^{-\mu B/k T}
+\end{equation}
+
+\begin{equation}
+    \mathcal{Z} = \mathcal{Z}_{1}^{N}
+\end{equation}
+Ne ricaviamo subito le probabilità di trovare la particella in uno dei due stati ed il numero medio di particelle in uno stato:
+
+\begin{equation}
+    w_{\downarrow} = \frac{e^{\mu B/k T}}{\mathcal{Z}_1} \qquad\qquad  w_{\uparrow} = \frac{e^{-\mu B/k T}}{\mathcal{Z}_1}
+\end{equation}
+
+\begin{equation}
+    N_{\downarrow} = N w_{\downarrow}  \qquad \qquad N_{\uparrow} = N w_{\uparrow}
+\end{equation}
+Ora mettiamoci nell'approssimazione di campo magnetico piccolo (o di alta temperatura)
+
+\begin{equation}
+    \mu B \ll k T
+\end{equation}
+Sviluppando in serie di Taylor le espressioni per $N_{\uparrow\downarrow}$ e usando $\mathcal{Z}_1 \approx 2$ otteniamo un'espressione per la magnetizzazione del sistema, che è paramagnetico:
+
+\begin{equation}
+    N_{\downarrow} \approx \frac{N}{2}\left(1+\frac{\mu B}{k T}\right) \qquad \qquad N_{\uparrow} \approx \frac{N}{2}\left(1-\frac{\mu B}{k T}\right)
+\end{equation}
+
+\begin{equation}
+    M = \mu (N_{\downarrow} - N_{\uparrow}) = N\,\frac{\mu^2 B}{k T}
+\end{equation}\\
+Per l'energia media del sistema otteniamo (rinunciando alle parentesi angolate)
+
+\begin{equation}
+    \begin{split}
+        E & =  \mu B (N_{\uparrow} - N_{\downarrow}) \\
+        & = \mu B \frac{N}{\mathcal{Z}_1}(e^{\mu B/k T} - e^{-\mu B/k T}) \\
+        & = \mu B N \tanh\left(-\frac{\mu B}{k T}\right)
+    \end{split}
+\end{equation}
+e per la capacità termica
+
+\begin{equation}
+    c = \frac{\partial E}{\partial T} = N\,\frac{\mu^2 B^2}{k T^2}\ddfrac{1}{\cosh^2\left(\mu B / k T\right)}
+\end{equation}
+Quest'espressione tende a zero per basse temperature/grossi campi (è necessario passare una certa soglia per accendere uno spin) e per alte temperature/piccoli campi (l'energia ha un massimo che corrisponde alla configurazione con tutti gli spin in su).\\
+Per l'entropia media abbiamo
+\begin{equation}
+    \begin{split}
+        S & = k \log \mathcal{Z} + k T \frac{\partial}{\partial T}\log \mathcal{Z}\\
+        & = N k \log \mathcal{Z}_1 + N k T \frac{\partial}{\partial T}\log \mathcal{Z}_1\\
+        & = N k \left[\log 2 +\log \cosh\left(\frac{\mu B}{k T}\right)- \frac{\mu B}{k T}\tanh \left(\frac{\mu B}{k T}\right)\right]
+    \end{split}
+\end{equation}
+che è nulla per basse temperature e tende ad un asintoto per $T\rightarrow \infty$ ($B\rightarrow 0$), il cui valore si può calcolare anche per definizione tramite la molteplicità:
+
+\begin{equation}
+    S = k \log \Gamma = k \log \Gamma_1^N = k \log 2^N = N k\log2
+\end{equation}
+In assenza di campo magnetico (o per alte temperature), il sistema tenderà infatti a massimizzare l'entropia, trovando l'equilibrio nella configurazione in cui ogni stato di spin è occupato dalla metà delle particelle.
+
+\section{Lo spazio delle fasi}
+
+Lo \textit{spazio delle fasi}, o \textit{spazio degli stati} di un sistema di $N$ particelle, è lo spazio $6N$-dimensionale delle coordinate e degli impulsi canonici del sistema; un punto dello spazio delle fasi identifica un microstato. Fissare l'energia dell'universo equivale a definire un'ipersuperficie $\Sigma_0$ a $6N-1$ dimensioni:
+
+\begin{equation}
+    \mathcal{E}_0\left(\{x_i\},\{p_i\}\right) = E_0
+\end{equation}
+Discretizziamo lo spazio in celle dividendo gli assi in intervalli equispaziati le cui lunghezze soddisfino
+
+\begin{equation}
+    \Delta x_k \Delta p_k = \tau
+\end{equation}
+dove $\tau$ è una costante con le dimensioni di un'azione (chissà quale). Scegliamo le cellette così piccole da poter considerare un solo stato per celletta. Ne segue che il numero di stati sarà l'area dell'ipersuperficie normalizzata con l'elemento di volume dello spazio delle fasi (con $f_0 = 3N$):
+
+\begin{equation}
+    \Gamma_0 = \frac{1}{\tau^{f_0}} \iint_{\Sigma_0} \prod_{i=1}^{ f_0} \mathrm{d}x_i \mathrm{d}p_i
+\end{equation}
+per cui l'entropia dell'universo varrà
+
+\begin{equation}
+    S_0 = k \log \iint_{\Sigma_0} \prod_{i=1}^{f_0} \mathrm{d}x_i \mathrm{d}p_i - k f_0 \log \tau
+\end{equation}
+Se ora definiamo una superficie $\Sigma'$ identificata da $E_\alpha' = E_0 - E_\alpha$ possiamo calcolare anche l'entropia del bagno termico (sommando sui gdl del bagno stesso):
+
+\begin{equation}
+    S_\alpha' = k \log \iint_{\Sigma'} \prod_{i=1}^{f'} \mathrm{d}x_i \mathrm{d}p_i - k f' \log \tau
+\end{equation}
+ed infine l'entropia media del sistemino:
+
+\begin{equation}
+\begin{split}
+    S & = S_0 - \langle S_\alpha'\rangle \\
+    & = k \log \iint_{\Sigma_0} \prod_{i=1}^{ f_0} \mathrm{d}x_i \mathrm{d}p_i 
+      + \left\langle k \log \iint_{\Sigma'} \prod_{i=1}^{ f'} \mathrm{d}x_i \mathrm{d}p_i  \right\rangle + \\
+    & \quad - k (f_0 - f') \log \tau
+\end{split}
+\end{equation}
+dal fatto che l'entropia è singolare per $\tau\rightarrow 0$ capiamo che la nostra trattazione è intrinsecamente quantistica e non possiamo eseguire il limite. Allora determiniamo la costante universale $\tau$ a partire dal caso più semplice possibile: una particella confinata in un segmento. Per l'energia e l'impulso quantistici abbiamo
+
+\begin{equation}
+    \mathcal{E}_q = \frac{\hbar^2 q^2}{2m} \qquad q = \frac{2\pi}{L}l \quad \text{con}\quad l \in \mathbb{Z}
+\end{equation}
+da cui la dimensione della celletta bidimensionale normalizzata con $\tau$ sarà
+
+\begin{equation}
+    \Delta l = \frac{L}{2\pi}\Delta q = \frac{L}{2\pi\hbar}\Delta p
+\end{equation}
+con il formalismo sviluppato troviamo invece
+
+\begin{equation}
+    \frac{1}{\tau}\int_L \int_{\Delta p}\mathrm{d}x\,\mathrm{d}p = \frac{L}{\tau}\Delta p
+\end{equation}
+ed eguagliando le due espressione determiniamo il \textit{quanto d'azione}:
+
+\begin{equation}
+    \tau = 2\pi \hbar = h
+\end{equation}
+Mandando al continuo la somma sugli stati, possiamo passare all'integrale sullo spazio delle fasi; cambiando misura e tornando indietro, riusciamo a risalire alla densità in energia:
+
+\begin{equation}
+    \sum_{\text{stati}}\,\,\rightarrow\,\, \frac{1}{(2\pi\hbar)^{3N}}\iint\prod_{i=1}^{3N} \mathrm{d}x_i\, \mathrm{d}p_i = \int \mathrm{d}\Gamma = \int \rho(\mathcal{E})\mathrm{d}\mathcal{E}
+    \label{intfasi}
+\end{equation}
+
+
+\section{Applicazione al caso di singola particella}
+
+Utilizziamo il formalismo sintetizzato nella \eqref{intfasi} per trovare la densità di energia nel caso di una singola particella libera. L'integrale sullo spazio delle fasi è 
+
+\begin{equation}
+    \Gamma = \frac{1}{(2\pi\hbar)^3}\iint\mathrm{d}^3 x\,\mathrm{d}^3 p = \frac{V}{(2\pi\hbar)^3}\int 4\pi p^2\,\mathrm{d} p
+\end{equation}
+e dalla relazione di dispersione non relativistica 
+
+\begin{equation}
+    \mathcal{E} = \frac{p^2}{2m}
+\end{equation}
+troviamo per la densità di energia
+
+\begin{equation}
+\begin{split}
+    \rho(\mathcal{E}) \,\mathrm{d}\mathcal{E} & = \frac{4\pi V}{(2\pi\hbar)^3}\,p^2\,\frac{\mathrm{d}p}{\mathrm{d\mathcal{E}}}\,\mathrm{d}\mathcal{E}\\
+    & = \frac{4\pi V m^{3/2}}{(2\pi\hbar)^3}\,\sqrt{2\mathcal{E}}\,\mathrm{d}\mathcal{E}
+\end{split}
+\end{equation}
+Da qui possiamo calcolare, ad esempio, l'energia media:
+
+\begin{equation}
+\begin{split}
+      \langle \mathcal{E} \rangle & = \ddfrac{\int_0^\infty \rho(\mathcal{E})\, \mathrm{d}\mathcal{E}\,\mathcal{E}\exp(-\mathcal{E}/kT)}{\int_0^\infty \rho(\mathcal{E})\, \mathrm{d}\mathcal{E}\,\exp(-\mathcal{E}/kT)} \\
+      & = k\, T\, \ddfrac{\int_0^{\infty}\mathrm{d}x \, x^{3/2}\, e^{-x}}{\int_0^{\infty}\mathrm{d}x \, x^{1/2}\, e^{-x}} \\
+      & = k\,T\,\frac{\Gamma(5/2)}{\Gamma(3/2)} \\
+      & = \frac{3}{2}\,k\,T
+\end{split}
+\end{equation}
+Lo stesso identico procedimento funziona per altre leggi di dispersione. Per esempio, nel caso ultrarelativistico per cui vale
+
+\begin{equation}
+    \mathcal{E} = c\,p
+\end{equation}
+otteniamo
+
+\begin{equation}
+    \rho(\mathcal{E})\,\mathrm{d}\mathcal{E} = \frac{4\pi V}{(2\pi\hbar)^3} \frac{\mathcal{E}^2}{c^3}\mathrm{d}\mathcal{E}
+\end{equation}
+
+\section{Gas interagente}
+
+Applichiamo il formalismo sviluppato ad un gas non relativistico immerso in un potenziale generico. L'elemento differenziale dello spazio delle fasi è
+\begin{equation}
+    \mathrm{d}\Gamma = \rho(\mathcal{E})\,\mathrm{d}\mathcal{E} = \frac{1}{N!(2\pi\hbar)^{3N}} \prod_{i=1}^{3N} \mathrm{d}x_i\,\mathrm{d}p_i 
+\end{equation}
+da cui la funzione di partizione:
+\begin{equation}
+    \begin{split}
+        \mathcal{Z} & = \int \rho(\mathcal{E}) \, \mathrm{d}\mathcal{E} \exp\left(-\frac{\mathcal{E}}{k T}\right) \\
+        & = \frac{1}{N!\,h^{3N}} \iint \prod_{i=1}^{3N} \mathrm{d}x_i\, \mathrm{d}p_i  \exp\left(-\frac{\mathcal{E}}{k T}\right) 
+    \end{split}
+\end{equation}
+Per proseguire assumiamo che il potenziale dipenda solo dalle coordinate generalizzate:
+\begin{equation}
+    \mathcal{E} = U(\{x_i\}) + \sum_{i=1}^{3N}\frac{p_i^2}{2m}
+\end{equation}
+da cui sostituendo otteniamo
+
+\begin{equation}
+\begin{split}
+    \mathcal{Z} & = \frac{1}{N!\,h^{3N}} \iint \prod_{i=1}^{3N} \mathrm{d}x_i\, \mathrm{d}p_i  \exp\left(-\frac{\sum_{i=1}^{3N}  p_i^2}{2 m k T} - \frac{U(\{x_i\})}{k T}\right)\\
+    & = \frac{1}{N!\,h^{3N}} \int \prod_{i=1}^{N} \mathrm{d}^3 p_i\, 
+    \exp\left(-\frac{\sum_{i=1}^{N}  |\mathbf{p}_i|^2}{2 m k T}\right) \int \prod_{i=1}^{N} \mathrm{d}^3 x_i \exp\left(-\frac{U(\{\mathbf{x}_i\})}{k T}\right)
+\end{split}
+\end{equation}
+Il primo integrale è uguale su tutte le particelle e può essere fattorizzato e, insieme al prefattore, ricondotto alla funzione di partizione di un gas ideale:
+\begin{equation}
+    \begin{split}
+        \mathcal{Z}_{IG} & = \frac{1}{N!}\left[\,\frac{1}{h^3} \iint \mathrm{d}^3 x \,\mathrm{d}^3 p\,\exp \left(-\frac{p^2}{2 m k T}\right)\,\right]^N \\
+        & = \frac{V^N}{N!\,h^{3N}} \int \prod_{i=1}^{N} \mathrm{d}^3 p_i\, 
+    \exp\left(-\frac{\sum_{i=1}^{N}  |\mathbf{p}_i|^2}{2 m k T}\right) 
+    \end{split}
+\end{equation}
+Il secondo integrale dipende solo dalla forma del potenziale e si chiama \textit{integrale delle configurazioni}:
+
+\begin{equation}
+    \mathcal{Q} \equiv \int \prod_{i=1}^{N} \mathrm{d}^3 x_i \exp\left(-\frac{U(\{\mathbf{x}_i\})}{k T}\right)
+\end{equation}
+La funzione di partizione del gas ideale può essere calcolata facilmente, ottenendo
+
+\begin{equation}
+    \mathcal{Z}_{IG} = \frac{1}{N!}\frac{V^N}{\Lambda^{3N}}
+\end{equation}
+dove si è definita la \textit{lunghezza termica di De Broglie}
+
+\begin{equation}
+    \Lambda \equiv \frac{2\pi\hbar}{\sqrt{2\pi m k T}}
+    \label{lambdatermica}
+\end{equation}
+e finalmente, per la funzione di partizione:
+
+\begin{equation}
+     \mathcal{Z} = \frac{1}{N!} \frac{\mathcal{Q}}{\Lambda^{3N}}
+     \label{zconfig}
+\end{equation}
+
+
+Procedendo analogamente possiamo ottenere un'espressione simile alla \eqref{zconfig} per la funzione di granpartizione:
+
+\begin{equation}
+\begin{split}
+    \mathcal{L} & = \sum_{\alpha} \exp\left(-\frac{E_\alpha-\mu N_\alpha}{k T}\right) \\
+    & = \sum_{N_\alpha} \left\{ \exp\left(\frac{\mu N_\alpha}{k T}\right) \sum_{\alpha} \exp\left(-\frac{E_\alpha}{k T}\right) \right\} \\
+    & = \sum_{N_\alpha} \left\{ \left[\exp\left(\frac{\mu}{k T}\right)\right]^{N_\alpha} \sum_{\alpha} \exp\left(-\frac{E_\alpha}{k T}\right) \right\} \\
+    & \equiv \sum_{N_\alpha} \left\{ z^{N_\alpha} \sum_{\alpha} \exp\left(-\frac{E_\alpha}{k T}\right) \right\}
+\end{split}
+\end{equation}
+dove $z$ è detta \textit{fugacità}; mandando al continuo e riconoscendo la funzione di partizione calcolata prima si ottiene
+
+\begin{equation}
+    \mathcal{L} = \sum_N \frac{z^N \mathcal{Q}_N}{N!\,\Lambda^{3N}}
+\end{equation}
+
+\section{Distribuzioni delle variabili termodinamiche}
+
+In assenza di campi, il vincolo sull'energia è la relazione di dispersione, che è l'equazione di un'ipersfera (3N-1)-dimensionale:
+
+\begin{equation}
+    \mathcal{E} = \frac{1}{2m}\sum_{i=1}^{3N} p_i^2
+    \label{ipersfera}
+\end{equation}
+
+Il differenziale dello spazio delle fasi, e di conseguenza la densità di stati, saranno proporzionali ad un elementino differenziale di volume dell'ipersfera, che a sua volta sarà proporzionale al suo raggio:
+
+\begin{equation}
+    \rho(\mathcal{E})\,\mathrm{d}\mathcal{E} \propto \delta V^{*}(\mathcal{E}) \propto (p^{*})^{3N}
+\end{equation}
+
+\begin{equation}
+    p^{*} = \sqrt{2m\mathcal{E}} = \left(\sum_i p_i^2\right)^{1/2}
+\end{equation}
+Con un po' di manipolazione algebrica scriviamo l'elementino in funzione dell'energia:
+
+\begin{equation}
+    \begin{split}
+        \delta V^{*} & \propto \frac{\partial V^{*}}{\partial \mathcal{E}} \,\delta \mathcal{E}\\
+        & \propto (p^{*})^{3N-1}\,\frac{\partial p^{*}}{\partial \mathcal{E}} \,\delta \mathcal{E}\\
+        & \propto \mathcal{E}^{3N/2-1}\,\delta\mathcal{E}
+    \end{split}
+\end{equation}
+Ricordando la \eqref{pesi1} vediamo quindi che vale
+
+\begin{equation}
+    w(\mathcal{E}) \propto \mathcal{E}^{3N/2-1}\exp\left(-\frac{\mathcal{E}}{k T}\right)
+\end{equation}
+ed infine, normalizzando, otteniamo la distribuzione in energia:
+
+\begin{equation}
+    w(\mathcal{E}) = \frac{1}{\Gamma(3N/2)} \left(\frac{\mathcal{E}}{k T}\right)^{3N/2-1} \frac{\exp\left(-\mathcal{E}/k T\right)}{k T}
+\end{equation}
+A partire da questa formula, calcoliamo l'energia più probabile, cercando il massimo della distribuzione, e l'energia media al solito modo:
+
+\begin{equation}
+   \frac{\partial w}{\partial\mathcal{E}} \impongo 0 \quad \implies \quad \mathcal{E}_{\text{max}} =  \left(\frac{3}{2}N-1\right) k T
+\end{equation}
+
+\begin{equation}
+    E = \int \mathrm{d}\mathcal{E}\,w(\mathcal{E})\,\mathcal{E} = \frac{3}{2}N k T
+\end{equation}
+I due valori differiscono per un fattore additivo $k T$ che non dipende da $N$; ne segue che per grandi valori di $N$ la distribuzione è molto piccata intorno al valor medio. Per quantificare la \textit{sharpness} calcoliamo la varianza della distribuzione:
+
+\begin{equation}
+    \sigma_{\mathcal{E}}^2 = \langle\mathcal{E}^2\rangle - E^2
+\end{equation}
+e usando
+
+\begin{equation}
+    \frac{\partial^2 F}{\partial T^2} = \frac{E^2 - \langle\mathcal{E}^2\rangle}{k T^3}
+\end{equation}
+otteniamo
+
+\begin{equation}
+     \sigma_{\mathcal{E}}^2 = -k T^3 \frac{\partial^2 F}{\partial T^2} = k T^2 c_V
+     \label{RMSenergia}
+\end{equation}
+Ma la capacità termica media è immediatamente calcolabile:
+
+\begin{equation}
+    c_V = \frac{\partial E}{\partial T} = \frac{3}{2} N k
+\end{equation}
+e mettendo tutto insieme otteniamo
+
+\begin{equation}
+    \frac{\sigma_\mathcal{E}}{E} = \sqrt{\frac{2}{3N}}
+\end{equation}
+Procedendo identicamente, troviamo la deviazione relativa dalla media del numero di particelle $N_\alpha$:
+
+\begin{equation}
+    \left(\frac{\partial^2 \Omega}{\partial\mu^2}\right)_{TV} = -\frac{\langle N_\alpha^2\rangle-N^2}{k T}
+\end{equation}
+
+\begin{equation}
+    \sigma_N^2 = - k T \left(\frac{\partial^2 \Omega}{\partial\mu^2}\right)_{TV}= k T \left(\frac{\partial N}{\partial\mu}\right)_{TV}
+\end{equation}
+
+\begin{equation}
+    \implies \,\,\frac{\sigma_N^2}{N^2} = \frac{k T}{V} k_T
+\end{equation}
+e per la temperatura:
+
+\begin{equation}
+    \sigma_T = \left(\frac{\partial T}{\partial \mathcal{E}}\right)_{VN} \sigma_\mathcal{E}
+\end{equation}
+
+\begin{equation}
+    \implies \,\,\frac{\sigma_T^2}{T^2} = \frac{k}{c_V}
+\end{equation}
+
+Più in generale, consideriamo una variabile $x$ e sviluppiamo l'entropia totale del sistema intorno al suo valor medio, ipotizzando che in corrispondenza del valor medio l'entropia abbia un massimo, ovvero che siamo all'equilibrio (matematicamente, che il prim'ordine sia nullo):
+
+\begin{equation}
+\begin{split}
+    S_t(x) & = S_t(\bar{x}) + \frac{1}{2}\frac{\partial^2 S_t}{\partial x^2} (x-\bar{x})^2 + \mathcal{O}((x-\bar{x})^3) \\
+    & \equiv S_t(\bar{x}) - \frac{1}{2}\beta k \,(x-\bar{x})^2 + \mathcal{O}((x-\bar{x})^3)
+\end{split}
+\end{equation}
+Ricordando la \eqref{pesi_entropia}, vediamo che la variabile sarà distribuita come una gaussiana:
+
+\begin{equation}
+     w(x) = \sqrt{\frac{\beta}{2\pi }} \exp\left(-\frac{\beta}{2}(x-\bar{x})^2\right)
+\end{equation}
+Per pigrizia supponiamo $\bar{x} = 0$; così otteniamo una gaussiana a media nulla e con varianza
+
+\begin{equation}
+    \sigma^2 = \langle x^2 \rangle = \frac{1}{\beta}
+\end{equation}
+La distribuzione è quindi una funzione della variazione di entropia totale:
+
+\begin{equation}
+   w(x) \propto \exp\left(\frac{\Delta S_t}{k}\right) \qquad \text{con} \qquad \Delta S_t \equiv S_t(x) - S_t(0)
+\end{equation}
+L'entropia totale si ottiene sommando sul sistemino e sul bagno termico: $S_t = S+S'$. Usando il fatto che l'energia e il volume del sistema totale sono fissati, possiamo scrivere
+
+\begin{equation}
+    \Delta S' = \frac{\Delta E' + P \Delta V'}{T} = \frac{- \Delta E - P \Delta V}{T}
+\end{equation}
+e quindi la distribuzione a meno di normalizzazione è, in funzione delle variabili del sistemino:
+
+\begin{equation}
+    w \propto \exp\left(-\frac{\Delta E - T \Delta S + P \Delta V}{k T}\right)
+    \label{distribuzione1}
+\end{equation}
+Tramite contacci, riusciamo a riscrivere questa formula in funzione di due sole variabili termodinamiche, che bastano a descrivere il sistema. Cominciamo sviluppando in serie la variazione di energia; i primi due ordini sono
+
+\begin{equation}
+    \Delta E^{(1)} = \frac{\partial E}{\partial S} \Delta S + \frac{\partial E}{\partial V} \Delta V = T \Delta S - P \Delta V
+\end{equation}
+
+\begin{equation}
+    \Delta E^{(2)} = \frac{1}{2}\frac{\partial^2 E}{\partial S^2} \Delta S^2 + \frac{\partial^2 E}{\partial S \partial V} \Delta S \Delta V + \frac{1}{2}\frac{\partial^2 E}{\partial V^2} \Delta V^2
+\end{equation}
+Nella somma all'esponente della \eqref{distribuzione1}, il prim'ordine si cancella, quindi abbiamo
+
+\begin{equation}
+    \Delta E - T \Delta S - P \Delta V = \Delta E^{(2)}
+\end{equation}
+e con un po' di pazienza otteniamo
+
+\begin{equation}
+    \begin{split}
+        \Delta E^{(2)} & = \frac{1}{2}\frac{\partial^2 E}{\partial S^2} \Delta S^2 + \frac{\partial^2 E}{\partial S \partial V} \Delta S \Delta V + \frac{1}{2}\frac{\partial^2 E}{\partial V^2} \Delta V^2 \\
+        & = \frac{1}{2}\left[\Delta S \left( \frac{\partial^2 E}{\partial S^2} \Delta S  + \frac{\partial^2 E}{\partial S \partial V} \Delta V \right) + \Delta V  \left( \frac{\partial^2 E}{\partial V^2} \Delta V  + \frac{\partial^2 E}{\partial S \partial V} \Delta S \right)\right]  \\
+        & = \frac{1}{2}\left[ \Delta S\,\Delta \left(\frac{\partial E}{\partial S}\right) + \Delta V \,\Delta\left(\frac{\partial E}{\partial V}\right)\right] \\
+        & = \frac{1}{2}\left(\Delta S \Delta T - \Delta V \Delta P\right)
+    \end{split}
+\end{equation}
+Inserendo nella \eqref{distribuzione1} otteniamo
+
+\begin{equation}
+    w \propto \exp\left(-\frac{\Delta S \Delta T - \Delta V \Delta P}{2 k T}\right)
+\end{equation}
+e tramite altri contacci riusciamo a riscrivere i prodotti di variabili coniugate in funzione di una delle due e di quantità note del sistema; in particolare, scegliendo $T$ e $V$, l'espressione per la distribuzione diventa un prodotto di gaussiane:
+
+\begin{equation}
+w \propto \exp \left(-\frac{c_V \Delta T^2}{2 k T^2}\right)\exp \left(-\frac{\Delta V^2}{2 k T V k_T}\right)
+\label{distribuzione2}
+\end{equation}
+$T$ e $V$ godono della proprietà di indipendenza statistica: calcolando a mano la covarianza a partire dalla \eqref{distribuzione2} otteniamo
+
+\begin{equation}
+    \langle \Delta T \Delta V \rangle = 0
+\end{equation}
+
+
+\section{Incertezze quantistiche}
+
+Un'incertezza sul valore dell'energia implica una variazione del numero di microstati accessibili, che deve necessariamente fluttuare per permettere al sistema di transire. Operativamente, dal momento che la densità di stati in energia è sempre ben definita, il problema dell'incertezza sull'energia non interferisce col formalismo sviluppato; nonostante ciò, lo sviluppo di questo formalismo si basa sull'idea che un sistema isolato all'equilibrio abbia un numero ben definito di stati - o quantomeno un'entropia ben definita, quindi è necessario discutere il problema.\\
+Scelto un valore $\mathcal{E}_0$ dell'energia, l'entropia calcolata su di un guscio infinitesimale dell'ipersfera \eqref{ipersfera} intorno a $\mathcal{E}_0$ nello spazio delle fasi si scrive
+
+\begin{equation}
+S = k \log \left[\rho(\mathcal{E}_0)\,\delta\mathcal{E}_0\right]
+\end{equation}
+Dal momento che la densità di stati è una funzione monotona e crescente nell'energia, la densità calcolata in $\mathcal{E}_0$ sarà maggiore della media della densità stessa sui valori inferiori:
+
+\begin{equation}
+    \rho(\mathcal{E}_0) \geq \frac{1}{\mathcal{E}_0}\int_0^{\mathcal{E}_0}\rho(\mathcal{E})\,\mathrm{d}\mathcal{E}
+\end{equation}
+da qui otteniamo un limite inferiore all'entropia:
+
+\begin{equation}
+    S \geq k\log\frac{\delta \mathcal{E}_0}{\mathcal{E}_0}+k\log\int_0^{\mathcal{E}_0}\rho(\mathcal{E})\,\mathrm{d}\mathcal{E}
+\end{equation}
+Inoltre, il numero di stati calcolato sulla sfera fino ad $\mathcal{E}_0$ sarà maggiore del numero di stati nel guscio infinitesimale:
+
+\begin{equation}
+    \rho(\mathcal{E}_0)\,\delta\mathcal{E}_0 \leq \int_0^{\mathcal{E}_0}\rho(\mathcal{E})\,\mathrm{d}\mathcal{E}
+\end{equation}
+il che ci dà anche un limite superiore. Mettendo insieme:
+
+\begin{equation}
+   k\log\int_0^{\mathcal{E}_0}\rho(\mathcal{E})\,\mathrm{d}\mathcal{E} - k\log\frac{\mathcal{E}_0}{\delta\mathcal{E}_0} \leq S \leq k\log\int_0^{\mathcal{E}_0}\rho(\mathcal{E})\,\mathrm{d}\mathcal{E}  
+\end{equation}
+L'incertezza quantistica sull'entropia (presa positiva) è quindi proporzionale al logaritmo dell'inverso dell'incertezza relativa sull'energia:
+
+\begin{equation}
+    \delta S = k \log \frac{\mathcal{E}_0}{\delta \mathcal{E}_0}
+\end{equation}
+[\textit{The form seems, at first, paradoxical. The smaller $\delta \mathcal{E}_0$ is, the less certain the entropy. This behavior can be understood in a number of ways. The most direct is from the point of view of the phase space. The entropy depends on the number of cells in a thin shell. If the shell gets too thin, the number of cells becomes sensitive to whether cells  fall just inside or just outside the shell; there is an edge effect, in other words. A thick shell is less susceptible to these fluctuations; the edges are less important.}] (Goodstein) \\
+Ricordando il principio di indeterminazione energia-tempo \eqref{indeterminazioneET} e prendendo l'esponenziale a destra e sinistra dell'ultima equazione, imponiamo che sia $\delta S \ll S$ e otteniamo una condizione sul tempo caratteristico del sistema (i.e. la vita media degli stati):
+
+\begin{equation}
+    \tau \cdot\delta\mathcal{E}_0 \sim \hbar
+\end{equation}
+
+\begin{equation}
+    \delta S \ll S \implies e^{S/k} \gg \frac{\mathcal{E}_0}{\delta \mathcal{E}_0} \implies \tau \ll \frac{\hbar}{\mathcal{E}_0}e^{S/k}
+\end{equation}
+Non è un limite molto restrittivo, dal momento che di solito $S/k \sim 10^{23}$. D'altronde, per richiedere che i livelli energetici siano ben definiti, l'incertezza quantistica sull'energia dev'essere minore di quella RMS termodinamica:
+
+\begin{equation}
+    \delta \mathcal{E}_0 \ll \sqrt{\langle\Delta \mathcal{E}^2\rangle}
+\end{equation}
+e richiamando la \eqref{RMSenergia}
+
+\begin{equation}
+    \delta \mathcal{E}_0 \ll T\sqrt{k c_V}\implies \tau \gg \frac{\hbar}{T\sqrt{k c_V}}
+\end{equation}
+
+\section{Il postulato di equiprobabilità}
+
+Abbiamo assunto dal primo momento che tutti gli stati permessi ad un sistema debbano essere equiprobabili; quest'assunzione può essere ricondotta a due passi logicamente precedenti, ovvero l'\textit{ipotesi ergodica} ed il \textit{teorema di Liouville.}
+
+L'ipotesi ergodica afferma che ogni sistema in uno degli stati energeticamente permessi, dopo un tempo finito, raggiungerà tutti gli altri stati. Quantisticamente, basta richiedere che le probabilità di transizione tra gli stati siano non nulle. 
+
+Il teorema di Liouville classico afferma che la densità di punti nello spazio delle fasi è conservata (i.e. vale un'equazione di continuità per densità e corrente di probabilità). L'enunciato quantistico è che in un sistema chiuso la probabilità di transizione tra due stati è uguale alla probabilità di transizione inversa (\textit{detailed balance theorem}):
+
+\begin{equation}
+    P_{a\rightarrow b} = |\langle b|a\rangle|^2 = |\langle a |b \rangle|^2 =  P_{b\rightarrow a}
+\end{equation}
+Il \textit{rate} di transizione sarà quindi
+
+\begin{equation}
+    R_{a\rightarrow b} = w_a P_{a\rightarrow b}
+\end{equation}
+La variazione nel tempo della probabilità che il sistema si trovi nello stato $a$ si scriverà
+
+\begin{equation}
+    \dot{w}_a = \sum_b w_b P_{b\rightarrow a}- w_a \sum_b P_{a\rightarrow b}
+\end{equation}
+Il primo termine tiene conto di tutte le transizioni da tutti gli altri stati ad $a$, il secondo delle transizioni inverse. La condizione di equilibrio è $\dot{w}_a = 0$; invocando il principio di \textit{detailed balance} otteniamo
+
+\begin{equation}
+    0 = \sum_b P_{a\rightarrow b}(w_b-w_a)
+\end{equation}
+che è un sistema lineare $P$ nelle variabili $w_i$. Emerge che $\det P \neq 0$, da cui l'equiprobabilità: $w_a = w_b$.
+
+\section{Il principio di indeterminazione tempo-energia}
+
+Vediamo brevemente come si arriva ad un \textit{principio di indeterminazione tra energia e tempo} in MQ non relativistica. La trattazione fa riferimento ad un articolo di Mandelstam e Tamm. Sappiamo che per due operatori hermitiani vale
+\begin{equation}
+    \langle(\Delta A)^2\rangle\langle(\Delta B)^2\rangle \geq \frac{1}{4}\left|\langle\left[A,B\right]\rangle\right|^2
+    \label{indeterminazione}
+\end{equation}
+da cui, per operatori canonicamente coniugati come posizione ed impulso, la relazione di indeterminazione assumerà la forma nota (alleggerendo la notazione per la deviazione standard):
+\begin{equation}
+\Delta x \Delta p \geq \frac{\hbar}{2}
+\end{equation}
+Vorremmo stabilire una relazione simile per tempo ed energia; mentre però quest'ultima è rappresentata dall'Hamiltoniano, il tempo non si comporta come un operatore in MQ non relativistica. Partiamo dalla \eqref{indeterminazione} nel caso in cui uno dei due operatori è l'Hamiltoniano e l'altro è un generico osservabile non esplicitamente dipendente dal tempo, e utilizziamo l'equazione del moto di Heisenberg
+\begin{equation}
+    i\hbar\frac{\mathrm{d}R}{\mathrm{d}t} = \left[R,H\right]
+\end{equation}
+per ottenere la seguente disuguaglianza:
+\begin{equation}
+    \Delta H \Delta R \geq \frac{\hbar}{2} \left|\frac{\mathrm{d}\langle R\rangle}{\mathrm{d}t}\right|
+    \label{deltahdeltar}
+\end{equation}
+Utilizziamo ora il fatto che il valore assoluto di un integrale non può eccedere l'integrale del valore assoluto, insieme all'assunzione che $\Delta H$ sia costante, per integrare la \eqref{deltahdeltar} su un breve intervallo ed ottenere 
+\begin{equation}
+    \Delta H \,\Delta t \geq \frac{\hbar}{2}\frac{|\langle R(t+\Delta t)\rangle|-\langle R(t)\rangle|}{\Delta R}
+\end{equation}
+Se ora introduciamo una nozione di \textit{tempo standard} $\Delta T$, definito come il tempo minimo in cui il valor medio di una certa quantità è variato di una deviazione standard, la precedente assume la forma di un \textit{principio di indeterminazione}:
+\begin{equation}
+    \Delta H \Delta T \geq \frac{\hbar}{2}
+    \label{indeterminazioneET}
+\end{equation}
+Un esempio applicativo si trova nella relazione tra la vita media di uno stato $\psi_0$ e l'incertezza $\Delta H$ sull'energia dello stato stesso. Definiamo il proiettore sullo stato $\psi_0$:
+\begin{equation}
+    L \equiv |\psi_0\rangle\langle\psi_0|
+\end{equation}
+che gode della proprietà $L^2 = L$. Il suo valor medio $\langle L \rangle \leq 1$ rappresenta la probabilità che il sistema si trovi nello stato $\psi_0$. Per definizione di deviazione standard la \eqref{deltahdeltar} assume per $\langle L \rangle$ la forma
+\begin{equation}
+    \Delta H \sqrt{\langle L^2 \rangle - \langle L \rangle^2} = \Delta H \sqrt{\langle L \rangle - \langle L \rangle^2} \geq \frac{\hbar}{2} \left|\frac{\mathrm{d}\langle L\rangle}{\mathrm{d}t}\right|
+\end{equation}
+Questa può essere facilmente integrata: nel caso in cui $\langle L(t = 0) \rangle = 1$ (i.e. il sistema era certamente in $\psi_0$ al tempo $t = 0$) integrando si ottiene per $t \geq 0$
+\begin{equation}
+    \frac{\pi}{2} - \arcsin\sqrt{\langle L(t) \rangle}  \leq \frac{\Delta H\cdot t}{\hbar}
+\end{equation}
+da cui, per $0\leq t\leq \pi \hbar/2\Delta H$:
+\begin{equation}
+    \langle L(t) \rangle \geq \cos^2\left(\frac{\Delta H \cdot t}{\hbar}\right)
+    \label{lcos2}
+\end{equation}
+Per concludere, se ora indichiamo con $\tau$ la vita media dello stato, la \eqref{lcos2} assume la semplice forma
+\begin{equation}
+    \tau \cdot \Delta H \geq \frac{\pi}{4}\hbar 
+\end{equation}
+
+\chapter{Gas perfetti}
+
+\section{Gas ideale (2)}
+
+Nella sezione \ref{gas_ideale_1} abbiamo formalizzato il concetto di gas ideale e abbiamo ottenuto formule adatte a studiarne la statistica. Ricordiamo che l'approssimazione di gas ideale si scrive
+
+\begin{equation}
+    \langle n_q \rangle \ll 1 \quad \iff \quad \exp\left(\frac{\mu}{k T}\right) \ll 1
+\end{equation}
+e in questa ipotesi, a partire dal potenziale di Landau, è immediato ricavare la legge dei gas perfetti:
+
+\begin{equation}
+    P V = N k T
+\end{equation}
+Vogliamo ricavare ora un'espressione per $N$ in funzione di $T$, $V$ e $\mu$. Partiamo da
+
+\begin{equation}
+    N = \sum_q \langle n_q \rangle \rightarrow \int \rho(\mathcal{E})\,\mathrm{d}\mathcal{E} \exp\left(-\frac{\mathcal{E}-\mu}{k T}\right)
+\end{equation}
+Ricordiamo che vale
+
+\begin{equation}
+    \rho(\mathcal{E}) = \frac{4\pi \sqrt{2}V m^{3/2}}{(2\pi\hbar)^3}\,\mathcal{E}^{1/2}
+\end{equation}
+quindi
+
+\begin{equation}
+\begin{split}
+    N & = \frac{4\pi \sqrt{2}V m^{3/2}}{(2\pi\hbar)^3} \,e^{\mu/k T} \int \mathrm{d}\mathcal{E}\, e^{-\mathcal{E}/k T}\,\mathcal{E}^{1/2}\\
+    & = \frac{V}{\Lambda^3}\,e^{\mu/k T}
+\end{split}
+\end{equation}
+Usando questo risultato e la legge di stato dei gas perfetti, otteniamo un'espressione per il potenziale chimico e per l'energia libera di Gibbs:
+
+\begin{equation}
+    \mu = -k T \log \frac{k T}{P \Lambda^3}
+\end{equation}
+
+\begin{equation}
+    \Phi = N\mu = -k T N \log \frac{k T}{P \Lambda^3}
+\end{equation}
+e da qui siamo in grado di trovare l'entropia (avere quantità dimensionali dentro i logaritmi è improprio, vanno intese come valori numerici):
+
+\begin{equation}
+    \begin{split}
+        S & = -\left(\frac{\partial \Phi}{\partial T}\right)_{PN} \\
+        & =  - N k \log P + \frac{5}{2} N k \log k T + N k \left(\frac{5}{2}+\frac{3}{2}\log\frac{m}{2\pi\hbar^2}\right) \\
+        & = - N k \log \frac{N}{V} + \frac{5}{2} N k \log k T + N k \left(\frac{5}{2}+\frac{3}{2}\log\frac{m}{2\pi\hbar^2}\right)
+    \end{split}
+\end{equation}
+Da queste formule si derivano tutti i risultati termodinamici. Ad esempio, per le capacità termiche:
+
+\begin{equation}
+    c_P = T \left(\frac{\partial S}{\partial T}\right)_P = \frac{5}{2} N k
+\end{equation}
+
+\begin{equation}
+    c_V = T \left(\frac{\partial S}{\partial T}\right)_V = \frac{3}{2} N k
+\end{equation}
+Usando la formula ottenuta per $\mu$ possiamo riscrivere la condizione di gas ideale come
+
+\begin{equation}
+    \frac{k T}{P \Lambda^3} \gg 1 \quad \iff \quad \frac{N \Lambda^3}{V} \ll 1 
+\end{equation}
+La lunghezza termica di De Broglie può essere interpretata come la dimensione caratteristica di una particella: a parole, si richiede che il volume totale delle particelle sia molto minore dello spazio disponibile.\\
+Calcolando l'energia libera di Helmholtz a $N$ fissato (ensemble canonico) otteniamo
+
+\begin{equation}
+    F = - N k T \log \frac{V}{\Lambda^3} + k T \log N! 
+\end{equation}
+mentre se fissiamo solo $\langle N \rangle$, ovvero lavoriamo nell'ensemble grancanonico, abbiamo
+
+\begin{equation}
+    F = \Phi - PV = - N k T \log \frac{V}{\Lambda^3} + k T \left(N\log N - N\right)
+\end{equation}
+Per $N$ grandi ci aspettiamo che le due espressioni coincidano; quest'intuizione è coerente con i conti tramite la formula di Stirling: per $N$ grande vale infatti 
+
+\begin{equation}
+\log N! \simeq N\log N - N
+\end{equation}
+
+\section{Statistiche di Bose-Einstein e Fermi-Dirac}
+
+In meccanica quantistica, l'indistinguibilità delle particelle è un principio fondamentale: le particelle devono essere indistinguibili per obbedire al principio di indeterminazione. [\textit{If we momentarily localize a particle in order to identify it, we can have no idea of its momentum, so that the identification must be lost in the next moment.}] (Goodstein)\\
+A basse temperature e alte densità, la classe di stati quantistici occupabili dalle particelle va ristretta in modo che non ci sia via di distinguerle. Consideriamo un sistema di due particelle descritto da una funzione d'onda $\psi(1,2)$, o $\psi(2,1)$ se le particelle vengono scambiate. Non ci dev'essere modo di distinguere tra queste due possibilità; deve quindi valere
+
+\begin{equation}
+    |\psi(1,2)|^2 = |\psi(2,1)|^2
+\end{equation}
+
+\begin{equation}
+    \psi(1,2) = \pm \psi(2,1)
+\end{equation}
+escludendo per il momento che le due funzioni d'onda possano avere fasi diverse da $0$ e $\pi$. L'ultima equazione implica che la funzione d'onda può essere simmetrica o antisimmetrica sotto scambio delle due particelle. Supponiamo ora che le particelle occupino stati di singola particella $a$ e $b$ con funzioni d'onda fattorizzate $\phi_a$ e $\phi_b$. Sono possibili due sole combinazioni di stati che soddisfano la proprietà di simmetria o antisimmetria:
+
+\begin{equation}
+    \psi_S \propto \phi_a(1)\phi_b(2) + \phi_a(2)\phi_b(1)
+\end{equation}
+
+\begin{equation}
+    \psi_A \propto \phi_a(1)\phi_b(2) - \phi_b(2)\phi_a(1)
+\end{equation}
+Notiamo subito che per due particelle nello stesso stato la funzione d'onda antisimmetrica è nulla (principio di esclusione di Pauli). Particelle la cui funzione d'onda è antisimmetrica si chiamano \textit{fermioni} e obbediscono alla statistica di Fermi-Dirac. Le particelle con funzione d'onda simmetrica sono dette \textit{bosoni} e obbediscono alla statistica di Bose-Einstein. Tutte le particelle conosciute in Natura obbediscono ad una di queste due statistiche. Secondo il teorema spin-statistica, le particelle a spin semintero sono fermioni e quelle a spin intero o nullo sono bosoni. \\
+Per un gas perfetto di fermioni, la somma per il potenziale di Landau conterrà solo i termini con $n_q = 0,1$:
+
+\begin{equation}
+    \Omega_q = -k T \log \left[1+\exp\left(\frac{\mu-\mathcal{E}_q}{k T}\right)\right]
+\end{equation}
+da cui il numero medio di occupazione di uno stato è
+
+\begin{equation}
+        \langle n_q \rangle  = -\frac{\partial \Omega_q}{\partial \mu} 
+         = \frac{1}{\exp[(\mathcal{E}_q-\mu)/k T]+1}
+    \label{fermi-dirac}
+\end{equation}
+Per ottenere il potenziale di Landau totale ed il numero medio di particelle nel sistema basta sommare sugli stati:
+
+\begin{equation}
+    \Omega = - k T \sum_q \log \left[1+\exp\left(\frac{\mu-\mathcal{E}_q}{k T}\right)\right]
+    \label{omegafermidirac}
+\end{equation}
+
+\begin{equation}
+    N = \sum_q \frac{1}{\exp[(\mathcal{E}_q-\mu)/k T]+1}
+\end{equation}
+Per i bosoni invece tutti i numeri di occupazione sono accessibili. Dobbiamo quindi calcolare la somma di una serie geometrica, la cui condizione di convergenza è $\mu \leq \mathcal{E}_0$. Nella nostra formulazione, l'energia del ground state è $\mathcal{E}_0 = 0$ e quindi dobbiamo richiedere che il potenziale chimico sia negativo.
+
+\begin{equation}
+\begin{split}
+    \Omega_q & = -k T \log \sum_{n=0}^{\infty} \exp \left[\frac{n(\mu -\mathcal{E}_q)}{k T}\right] \\
+    & = k T \log \left(1-\exp\left(\frac{\mu - \mathcal{E}_q}{k T}\right)\right)
+\end{split}
+\label{omegaboseeinstein}
+\end{equation}
+quindi l'espressione  per la statistica è
+\begin{equation}
+        \langle n_q \rangle  = -\frac{\partial \Omega_q}{\partial \mu} 
+         = \frac{1}{\exp[(\mathcal{E}_q-\mu)/k T]-1}
+    \label{bose-einstein}
+\end{equation}
+
+\section{Gas perfetto debolmente degenere}
+
+Vogliamo studiare il comportamento di un gas perfetto non appena si manifesta la sua vera natura quantistica. \\
+Dobbiamo innanzitutto verificare la legittimità del passaggio da somme a integrali; affinché il limite sia legale, dobbiamo imporre che le fluttuazioni statistiche dell'energia siano molto più grandi della separazione tra i livelli energetici. Per una singola particella, le fluttuazioni sono dell'ordine di $k T$, quindi dobbiamo richiedere, anche nel limite di bassa temperatura, che valga
+
+\begin{equation}
+    k T \gg \frac{\hbar^2}{2m}\left(\frac{2\pi}{L}\right)^2
+\end{equation}
+Per $L \sim 1$ cm e $m \sim 10^{-24}$ g - la massa di un atomo di idrogeno - troviamo $T \gg 10^{-13}$ K. Per elettroni troviamo $T \gg 10^{-10}$ K. Da un punto di vista pratico, non dovremo mai preoccuparci di cadere fuori da queste condizioni. \\
+Un altro accorgimento necessario riguarda particelle dotate di spin; in assenza di campi, ogni spin $S$ ha $g = 2S+1$ orientazioni possibili, e ciò comporta una degenerazione aggiuntiva, incrementando di un fattore $g$ il numero di stati possibili e adducendo all'entropia un fattore additivo $k \log g$. Bisogna tenerne conto nella misura dello spazio delle fasi, sostituendo
+
+\begin{equation}
+    \mathrm{d}\Gamma = \frac{\mathrm{d}^3x\,\mathrm{d}^3p}{(2\pi\hbar)^3} \rightarrow g\,\frac{\mathrm{d}^3x\,\mathrm{d}^3p}{(2\pi\hbar)^3} 
+\end{equation}
+Lo sviluppo delle statistiche F-D e B-E al prim'ordine nella fugacità $z = \exp(\mu/kT)$ restituisce la statistica classica. Per vedere gli effetti quantistici al leading order, sviluppiamo in serie le equazioni per il potenziale di Landau ottenute sommando sugli stati $q$ la \eqref{omegafermidirac} e la \eqref{omegaboseeinstein}; il segno superiore è per la F-D, quello inferiore per la B-E:
+
+\begin{equation}
+    \begin{split}
+        \Omega & = \mp k T \sum_q \log \left( 1 \pm \exp\left(-\frac{\mathcal{E}_q-\mu}{k T}\right) \right)\\
+        & \simeq - k T \sum_q  \exp\left(-\frac{\mathcal{E}_q-\mu}{k T}\right) \pm \frac{k T}{2} \sum_q  \exp\left(-2\,\frac{\mathcal{E}_q-\mu}{k T}\right) \\
+        & = \Omega_{\text{class}} \pm \frac{k T}{2} \exp\left(\frac{2\mu}{k T}\right) \sum_q \exp\left(-\frac{2\mathcal{E}_q}{k T}\right)
+    \end{split}
+\end{equation}
+Mandiamo la somma ad un integrale sugli stati:
+
+\begin{equation}
+    \sum_q \exp\left(-\frac{2\mathcal{E}_q}{k T}\right) \rightarrow \int_{0}^{\infty} \rho(\mathcal{E})\mathrm{d}\mathcal{E}\exp\left(-\frac{2\mathcal{E}}{k T}\right)
+\end{equation}
+Con una sostituzione $\mathcal{E} \rightarrow 2\mathcal{E}$ ed usando $\rho(\mathcal{E})\propto \sqrt{\mathcal{E}}$ lo riscriviamo come
+
+\begin{equation}
+    \left(\frac{1}{2}\right)^{3/2} \int_{0}^{\infty} \rho(\mathcal{E})\mathrm{d}\mathcal{E}\exp\left(-\frac{\mathcal{E}}{k T}\right)
+\end{equation}
+e riscrivendo il potenziale classico come
+
+\begin{equation}
+    \Omega_{\text{class}} \rightarrow - k T \exp\left(\frac{\mu}{k T}\right) \int_{0}^{\infty} \rho(\mathcal{E})\mathrm{d}\mathcal{E}\exp\left(-\frac{\mathcal{E}}{k T}\right)
+\end{equation}
+abbiamo finalmente
+
+\begin{equation}
+    \Omega \simeq \Omega_{\text{class}}\left[1\mp \frac{e^{\mu/k T}}{2^{5/2}}\right]
+\end{equation}
+e usando $\Omega = -P V$, $\Omega_{\text{class}} = - N k T$:
+
+\begin{equation}
+     P V \simeq N k T \left[1\mp \frac{e^{\mu/k T}}{2^{5/2}}\right]\qquad \,\,\frac{-\text{F-D}}{+\text{B-E}}
+\end{equation}
+L'effetto della statistica agisce come una specie di forza sulle particelle, ma dalla precedente non possiamo davvero dire se la forza è attrattiva o repulsiva, perché usando $\Omega$ abbiamo fissato $T$, $V$ e $\mu$, trovando quindi una correzione alla quantità $P/N$, con $N$ variabile. Per conoscere la correzione maggiore alla pressione a fissati $T$, $V$ ed $N$ dobbiamo costruire l'energia libera $F$ di Helmholtz. Dalla definizione dei potenziali abbiamo
+
+\begin{equation}
+    (\delta \Omega)_{T,V,\mu} = (\delta F)_{T,V,N}
+\end{equation}
+dove
+
+\begin{equation}
+    \delta \Omega = \Omega - \Omega_{\text{class}}
+\end{equation}
+
+\begin{equation}
+    \delta F = F - F_{\text{class}}
+\end{equation}
+e quindi 
+
+\begin{equation}
+    \delta \Omega = \pm N k T \,\frac{e^{\mu/k T}}{2^{5/2}}
+\end{equation}
+Per eliminare $\mu$ utilizziamo l'espressione classica (correzioni porteranno a termini superiori), sostituendo quindi
+
+\begin{equation}
+    \mu = \mu_{\text{class}} = - k T \log \frac{V}{N\Lambda^3}
+\end{equation}
+da cui
+
+\begin{equation}
+    F = F_{\text{class}} \pm \frac{N^2 k T \Lambda^3}{2^{5/2} V}
+\end{equation}
+ed infine
+
+\begin{equation}
+    P = -\frac{\partial F}{\partial V} = \frac{N k T}{V} \left(1 \pm \frac{N \Lambda^3}{2^{5/2}V}\right)\qquad \,\,\frac{+\text{F-D}}{-\text{B-E}}
+\end{equation}
+[\textit{From the signs of the corrections, we see that Fermi statistics, the exclusion of particles from multiple occupancy of single-particle quantum states, has the effect of a repulsive force between the particles, whereas Bose statistics, which is just the absence of any restriction at all, has the effect of an attractive interaction}.]
+
+\section{Gas di Fermi}
+
+\subsection{Statistica}
+
+Consideriamo ora un gas di fermioni fortemente degenere. Nel limite di temperatura nulla, il gas va nel livello energetico più basso permesso dal principio di esclusione di Pauli: nel caso a spin 1/2 (e.g. elettroni), a due particelle è permesso di occupare il \textit{ground state} di singola particella, con energia cinetica nulla; le due particelle successive possono occupare il primo stato eccitato, e così via fino ad esaurire le particelle. Lo spazio delle fasi di singola particella avrà tutte le cellette piene, dall'origine fino ad un impulso $p_F$, detto impulso di Fermi, dipendente dal volume della scatola e dal numero di particelle. L'ipersfera nello spazio delle fasi a molti corpi è collassata in un punto, dal momento che c'è un unico insieme permesso per i $3N$ valori dei $p_i$. 
+Nel limite $T=0$, il numero di occupazione in funzione dell'energia ha la forma di un gradino, dove $\mu_0$ è valore di $\mu$ a $T=0$. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.6]{gradino.jpg}
+    \label{fig:my_label}
+\end{figure}
+
+\newpage
+Il valore di $\mu_0$ è fissato dall'equazione
+
+\begin{equation}
+\begin{split}
+    N & = \lim_{T \to 0}\, \sum_q \frac{1}{\exp\left[(\mathcal{E}_q-\mu)/k T\right]+1}\\
+    & \rightarrow \lim_{T \to 0}\,\int_{0}^{\infty} \frac{\rho(\mathcal{E})\,\mathrm{d}\mathcal{E}}{\exp[(\mathcal{E}-\mu)/k T]+1} \\
+    & = \int_{0}^{\mu_0} \rho(\mathcal{E})\,\mathrm{d}\mathcal{E}
+\end{split}
+\end{equation}
+dove ho mandato la somma al continuo, portato il limite dentro l'integrale e usato il fatto che a $T=0$ il numero di occupazione medio è un gradino. Piuttosto che eseguire il conto, ricordiamo che $N$ è il numero di celle nello spazio delle fasi di singola particella in una sfera di raggio $p_F$:
+
+\begin{equation}
+    N = \frac{g V}{(2\pi\hbar)^3}\frac{4}{3}\pi p_F^3
+\end{equation}
+Risolvo per l'impulso di Fermi ottenendo 
+\begin{equation}
+    p_F = 2\pi\hbar \left(\frac{N}{V}\right)^{1/3}\left(\frac{3}{4\pi g}\right)^{1/3}
+\end{equation}
+e da qui il valore di $\mu_0$, che è detto \textit{energia di Fermi}:
+
+\begin{equation}
+    \mu_0 \equiv \mathcal{E}_F = \frac{p_F^2}{2m} = \frac{(2\pi\hbar)^2}{2m} \left(\frac{N}{V}\right)^{2/3}\left(\frac{3}{4\pi g}\right)^{2/3}
+\end{equation}
+Si definisce anche la temperatura di Fermi:
+
+\begin{equation}
+    k T_F \equiv \mathcal{E}_F
+\end{equation}
+La sfera piena nello spazio degli impulsi è detta sfera di Fermi (o mare di Fermi) e la sua superficie è detta superficie di Fermi. \\
+La densità di stati è proporzionale a $\mathcal{E}^{1/2}$. Di conseguenza l'energia media per particella è
+
+\begin{equation}
+    \begin{split}
+        \langle\mathcal{E}\rangle & = \ddfrac{\int_0^{\mathcal{E}_F} \rho(\mathcal{E})\,\mathrm{d}\mathcal{E} \,\mathcal{E}}{\int_0^{\mathcal{E}_F} \rho(\mathcal{E})\,\mathrm{d}\mathcal{E}} \\
+        & = \ddfrac{\int_0^{\mathcal{E}_F} \mathrm{d}\mathcal{E} \,\mathcal{E}^{3/2}}{\int_0^{\mathcal{E}_F} \mathrm{d}\mathcal{E}\,\mathcal{E}^{1/2}}  \\
+        & = \frac{3}{5}\mathcal{E}_F
+    \end{split}
+\end{equation}
+L'energia totale è
+
+\begin{equation}
+    E = \frac{3}{5}N\mathcal{E}_F = \frac{3(2\pi\hbar)^2}{10m} \left(\frac{N}{V}\right)^{2/3}\left(\frac{3}{4\pi g}\right)^{2/3} N
+\end{equation}
+L'entropia è nulla (lo stato ha molteplicità 1) e l'energia è uguale all'energia libera. La pressione è data da
+
+\begin{equation}
+    P = -\left(\frac{\partial E}{\partial V}\right)_N = \frac{2}{3} \frac{E}{V}
+    \label{energia-pressione}
+\end{equation}
+La pressione finita a temperatura nulla è una conseguenza della forza effettiva repulsiva tra i fermioni. La relazione tra energia e pressione è un risultato generale per i gas perfetti e dipende solo dalla dispersione $\mathcal{E}=p^2/2m$.\\
+Consideriamo qualitativamente cosa può succedere al gas a temperature sopra lo zero assoluto. L'unica scala di temperatura caratteristica è quella di Fermi; il limite di basse temperature sarà di conseguenza
+
+\begin{equation}
+    T \ll T_F
+\end{equation}
+Cominciamo stimando $T_F$:
+
+\begin{equation}
+    T_F = \frac{(2\pi\hbar)^2}{2 m k} \left(\frac{N}{V}\right)^{2/3}\left(\frac{3}{4\pi g}\right)^{2/3}
+\end{equation}
+Dal momento che siamo interessati a utilizzare questo modello di gas per il comportamento degli elettroni nei metalli, usiamo la massa e lo spin dell'elettrone, e la densità di elettroni di conduzione nel rame, ottenendo
+
+\begin{equation}
+    T_F \sim 8.5 \times 10^4 \,\,\text{K}
+\end{equation}
+che è due odg sopra il punto di fusione del rame stesso: il gas di elettroni è sempre in limite di bassa temperatura.\\
+All'aumentare della temperatura, le particelle sulla superficie di Fermi hanno la possibilità di eccitarsi con un energia dell'ordine di $k T$, mentre gli elettroni nel mare di Fermi, oltre un $k T$ sotto la superficie, non possono salire agli stati eccitati subito successivi, che sono occupati. La frazione di elettroni eccitati sarà dell'ordine di $T/T_F$ del gas totale. Il grafico di $\langle n\rangle(\mathcal{E})$ diventa un gradino un po' consumato:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.8]{quasigradino.jpg}
+    \label{fig:my_label}
+\end{figure}
+Tutta la termodinamica avviene in un guscio di larghezza $\sim k T$ intorno alla superficie della sfera di Fermi. \\
+Il modello di gas di Fermi in una scatola risulta buono per gli elettroni in un metallo (background uniforme positivamente carico) almeno finché la struttura atomica del metallo stesso non è importante rispetto alla lunghezza d'onda caratteristica degli elettroni, ovvero $\lambda\gg a$ dove $a$ è la larghezza caratteristica del reticolo atomico; elettroni a grande lunghezza d'onda dovrebbero essere insensibili alla struttura atomica del metallo. La condizione è obbedita per stati a basso impulso ($ p = \hbar q = \frac{2\pi\hbar}{\lambda}$), e per questi stati possiamo assumere che la dispersione mantenga la forma $\mathcal{E}\propto q^2$; a lunghezze d'onda dell'ordine di $a$ assumerà una forma diversa. Anche a $q$ basso, dove la dispersione quadratica è preservata, cambia il coefficiente di proporzionalità: possiamo scrivere
+
+\begin{equation}
+    \mathcal{E} = \frac{\hbar^2 q^2}{2m^{*}}
+\end{equation}
+dove $m^{*}$ è detta massa efficace. Possiamo interpretarlo come un risultato della tendenza degli elettroni a schermarsi, come se il background positivo rendesse gli elettroni più pesanti. Se l'energia di Fermi corrisponde ad un valore di $q$ dove vale la dispersione quadratica, dobbiamo modificare il modello mandando $m\to m^{*}$. Nel caso contrario, dobbiamo aspettarci un comportamento diverso da quello predetto dal modello di gas perfetto. 
+
+\subsection{Proprietà termiche}
+Torniamo al gas di Fermi. Ripartiamo dal potenziale di Landau:
+
+\begin{equation}
+    \begin{split}
+        \Omega & = - k T \sum_q \log \left(1+ \exp \left(\frac{\mu-\mathcal{E}_q}{k T}\right)\right)\\
+        & = - k T \int_{0}^{\infty} \rho(\mathcal{E})\,\mathrm{d}\mathcal{E}  \log \left(1+ \exp \left(\frac{\mu-\mathcal{E}}{k T}\right)\right)
+    \end{split}
+\end{equation}
+Piuttosto che integrare per parti, ricordiamo che per gas perfetti con dispersione quadratica vale
+
+\begin{equation}
+    \begin{split}
+        \Omega & = -\frac{2}{3}\,E = -\frac{2}{3}\int_{0}^{\infty}\rho(\mathcal{E})\,\mathrm{d}\mathcal{E} \,\mathcal{E}\,\bar{n}(\mathcal{E}) \\
+        & = - \frac{2}{3}\frac{4\pi V g \sqrt{2} m^{2/3}}{(2\pi\hbar)^3} \int_{0}^{\infty}\frac{\mathcal{E}^{3/2}\,\mathrm{d}\mathcal{E}}{\exp((\mathcal{E}-\mu)/k T)+1}
+    \end{split}
+\end{equation}
+Ci siamo ricondotti a dover eseguire l'integrale nell'ultima equazione, o più in generale integrali della forma
+
+\begin{equation}
+    I = \int_{0}^{\infty}\frac{f(\mathcal{E})\,\mathrm{d}\mathcal{E}}{\exp((\mathcal{E}-\mu)/k T)+1}
+\end{equation}
+Il fattore $\bar{n}(\mathcal{E})$ nell'integrale è molto vicino ad una funzione gradino quando $T\ll T_F$, quindi il contributo maggiore all'integrale $I$ sarà dato da
+
+\begin{equation}
+    I_0 = \int_{0}^{\mu} f(\mathcal{E})\,\mathrm{d}\mathcal{E}
+\end{equation}
+quindi dobbiamo valutare piccole correzioni del tipo
+
+\begin{equation}
+    I = I_0 + \delta I
+\end{equation}
+Dal momento che $I = I_0$ a $T=0$, il comportamento termico è incluso in $\delta I$. Sviluppo in serie di Taylor:
+
+\begin{equation}
+    I = I_0 + \left(\frac{\partial I}{\partial T }\right)_{T=0} T + \frac{1}{2}\left(\frac{\partial^2 I}{\partial T^2}\right)_{T=0} T^2 + \dots
+\end{equation}
+Scopriremo che il termine lineare sparisce, quindi la prima correzione non nulla è quella quadratica in $T$. \\
+Piuttosto che procedere con il calcolo dello sviluppo in serie, consideriamo la differenza tra l'integrale sul gradino e l'integrale esatto: introduciamo una sovrastima subito prima di $\mu$, su di un intervallo di larghezza $\sim k T$, e una sottostima subito dopo:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale = 0.7]{quasigradino2.jpg}
+    \label{fig:my_label}
+\end{figure}
+Dal momento che questi due errori quasi si compensano a vicenda, il termine lineare in $T$ è nullo. \\
+Per calcolare le correzioni successive, trasliamo scrivendo
+
+\begin{equation}
+    z = \frac{\mathcal{E}-\mu}{k T}
+\end{equation}
+Definendo due funzioni $g_0(z)$ e $g_1(z)$, nulle ovunque tranne che in un intorno di $z=0$, le correzioni sono date da 
+
+\begin{equation}
+    \begin{split}
+        \delta I & = \int_{-\infty}^{+\infty} \mathrm{d}\mathcal{E} \, f(\mathcal{E})\, [g_1(z)-g_0(z)] \\
+        & = \int_{-\infty}^{+\infty}  k T \mathrm{d}z\,f(\mu + k T z)\, [g_1(z)-g_0(z)]
+    \end{split}
+\end{equation}
+Dal momento che le funzioni di peso $g_0$ e $g_1$ sono non nulle solo vicino a $z=0$, espandiamo l'integranda intorno a $z=0$:
+
+\begin{equation}
+    \begin{split}
+        f(\mu + k T z) & = f(\mu) + k T z \left(\frac{\partial f}{\partial \mathcal{E}}\right)_{\mathcal{E}=\mu} + \dots \\
+        & = f(\mu) + k T z f'(\mu)+ \dots
+    \end{split}
+\end{equation}
+Sostituendo dentro l'integrale abbiamo
+
+\begin{equation}
+    \begin{split}
+        \delta I & = k T f(\mu)\int_{-\infty}^{+\infty} \mathrm{d}z \, [g_1(z)-g_0(z)] \\
+        & + k^2 T^2 f'(\mu) \int_{-\infty}^{+\infty} \mathrm{d}z \, [g_1(z)-g_0(z)] \,z
+    \end{split}
+    \label{integralo1}
+\end{equation}
+La funzione $g_1(z)$ è la parte di $\bar{n}$ per $z\geq 0$:
+
+\begin{equation}
+    g_1(z) = \frac{1}{e^z+1}
+\end{equation}
+mentre $g_0(z)$ è la funzione gradino meno $\bar{n}$ per $z$ negativi:
+
+\begin{equation}
+    g_0(z) = 1- \frac{1}{e^z+1} = \frac{1}{e^{-z}+1}
+\end{equation}
+Il primo termine di \eqref{integralo1} è nullo. Il secondo è
+
+\begin{equation}
+    \int_{0}^{\infty} \mathrm{d}z \, z g_1(z) - \int_{-\infty}^0 \mathrm{d}z\, z g_0(z) = 2 \int_0^{\infty} \frac{z\,\mathrm{d}z}{e^z+1} = \frac{\pi^2}{6}
+\end{equation}
+Alla fine, includendo l'ordine successivo, otteniamo per $I$:
+
+\begin{equation}
+    I = \int_0^{\mu} f(\mathcal{E})\,\mathrm{d}\mathcal{E} + \frac{\pi^2}{6}\,f'(\mu) k^2 T^2 + \frac{7\pi^4}{360}\,f'''(\mu) k^4 T^4 + \dots
+\end{equation}
+Quest'equazione è il risultato fondamentale necessario a studiare le proprietà termiche del gas perfetto di Fermi.\\
+Adesso possiamo calcolare la prima correzione quadratica in $T$ al potenziale di Landau:
+
+\begin{equation}
+    \Omega = -\frac{2}{3}\,\frac{4\pi\sqrt{2}\, V g\, m^{3/2}}{(2\pi\hbar)^3} \,\left[\frac{2}{5}\mu^{5/2}+\frac{\pi^2}{4}\mu^{1/2}(k T)^2\right] 
+\end{equation}
+e da qui il numero di particelle:
+
+\begin{equation}
+    N = -\frac{\partial \Omega}{\partial \mu} = N_0 \, \left[1+\frac{\pi^2}{8}\left(\frac{k T}{\mu}\right)^2\right]
+    \label{numerotquadro}
+\end{equation}
+Come cambia $\mu$ in funzione di $T$ a $N$ fissato? Ovvero, come si distribuiscono gli $N$ elettroni nei livelli al variare della temperatura? Per rispondere consideriamo due sistemi $\mathcal{S}$ e $\mathcal{S}'$ a temperatura nulla con $N_0 \neq N_0'$ e $\mu\neq\mu'$. Mentre $T$ sale, $N$ ed $N'$ cambiano secondo la \eqref{numerotquadro}. Se $N$ rimanesse invariato, $\mu$ dovrebbe cambiare di conseguenza; per trovare un'espressione per $\mu$, basta quindi imporre
+
+\begin{equation}
+    N' \impongo N_0(\mu)
+\end{equation}
+Dalla \eqref{numerotquadro} vediamo che $N_0\propto \mu^{3/2}$, così possiamo eliminare il rapporto $N_0'/N_0$ in favore di $\mu'/\mu$ per ottenere
+
+\begin{equation}
+    \left[1+\frac{\pi^2}{8}\left(\frac{k T}{\mu'}\right)^2\right]\left(\frac{\mu'}{\mu}\right)^{3/2} = 1
+\end{equation}
+Ora risolvo per $\mu'$, sostituisco $\mu$ a $\mu'$ a denominatore (compiendo un errore oltre il second'ordine) e sviluppo in serie di Taylor:
+
+\begin{equation}
+\begin{split}
+    \mu'& = \ddfrac{\mu}{\left[1+\pi^2/8\left(k T / \mu'\right)^2\right]^{2/3}} \\
+    & \simeq \mu \,\left[1-\frac{\pi^2}{12}\left(\frac{k T}{\mu}\right)^2\right]
+\end{split}
+\end{equation}
+Sostituendo dentro l'espressione per $\Omega$, posso ad esempio calcolare entropia e capacità termica:
+
+\begin{equation}
+    \begin{split}
+        S & = -\frac{\partial \Omega}{\partial T} \\
+        & = \frac{4\pi\sqrt{2}\, V g\, m^{3/2}}{(2\pi\hbar)^3}\, \frac{\pi^2}{3}\,\mu^{1/2} k^2 T \\
+        & \simeq \frac{\pi^2}{2} N k \frac{T}{T_F}
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    c_V = T \left(\frac{\partial S}{\partial T}\right)_{V} \simeq \frac{\pi^2}{2} N k \frac{T}{T_F}
+\end{equation}
+La stima del calore specifico è in buon accordo con i valori sperimentali. Stime più precise si ottengono mandando $m\to m^{*}$; la massa effettiva può essere misurata indipendentemente tramite campi magnetici: è legata alla frequenza di ciclotrone da 
+
+\begin{equation}
+    \omega_c = \frac{e |\mathbf{H}|}{m^{*}c}
+\end{equation}
+
+\subsection{Paramagnetismo di Pauli}
+
+Se accendiamo un campo magnetico, la degenerazione dovuta allo spin è rotta:
+
+\begin{equation}
+    \mathcal{E}_{\pm} = \frac{p^2}{2m} \pm \mu B
+\end{equation}
+dove $\mu$ è il momento magnetico della particella. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{paramagnetismo.jpg}
+\end{figure}
+
+Il fattore additivo trasla il limite inferiore dell'energia di un fattore $\pm \mu B$, di cui dobbiamo tenere conto nel calcolo della densità in energia e dei numeri di occupazione. Per $T\sim 0$ e $B=0$ le densità per le due popolazioni degeneri sono date da $\rho(\mathcal{E})/2$ e sono piene da $\mathcal{E}=0$ all'energia di Fermi $\mathcal{E}_F$. All'equilibrio, le energie di Fermi delle due popolazioni sono uguali, quindi i due stati saranno popolati diversamente. La differenza $\Delta N$ tra i numeri di occupazione degli stati $\uparrow$ e $\downarrow$ è data in buona approssimazione dal prodotto della differenza dei due livelli energetici e della densità in energia calcolata all'energia di Fermi:
+
+\begin{equation}
+\begin{split}
+    \Delta N & \simeq 2\mu B \,\frac{\rho(\mathcal{E}_F)}{2} \\
+    & = 2 \mu B \frac{4\pi\sqrt{2}\, V\, m^{3/2}}{(2\pi\hbar)^3} \,\mathcal{E}_F^{1/2} \\
+    & = \frac{3}{2} N \frac{\mu B}{\mathcal{E}_F}
+\end{split}
+\end{equation}
+dove il numero d'occupazione medio s'intende calcolato sulla densità a $B = 0$ e $T = 0$:
+
+\begin{equation}
+    N = \int_0^{\mathcal{E}_F} \rho(\mathcal{E})\,\mathrm{d}\mathcal{E}
+\end{equation}
+Questa forma debole di paramagnetismo è detta \textit{paramagnetismo di Pauli}. La magnetizzazione è data da
+
+\begin{equation}
+    M = \mu \Delta N = \frac{3N}{2}\frac{\mu^2}{\mathcal{E}_F}B
+\end{equation}
+
+\subsection{Emissione termoionica}
+
+L'effetto termoionico è l'emissione di elettroni indotta termicamente nei conduttori. Per studiarlo, facciamo qualche ipotesi:
+
+\begin{itemize}
+    \item il metallo è una buca di potenziale alta $W$;
+    \item il \textit{rate} di emissione è basso, i.e. il numero di elettroni nel metallo è circa costante;
+    \item è presente un debole campo elettrico esterno che rimuove gli elettroni emessi (altrimenti il \textit{rate} sarebbe nullo).
+    \item è il compleanno di Stefano (tanti auguri)
+\end{itemize}
+Affinché gli elettroni escano dal metallo, dobbiamo richiedere che in una certa direzione (scegliamo $z$) sia 
+
+\begin{equation}
+    p_z > \sqrt{2m W}
+\end{equation}
+Inoltre, detto $\mathrm{d}t$ il tempo di emissione, $\mathrm{d}z$ deve soddisfare
+
+\begin{equation}
+    \mathrm{d}z = v_z\,\mathrm{d}t = \frac{p_z}{m}\mathrm{d}t
+\end{equation}
+Se ora integro il numero d'occupazione sulla parte di spazio delle fasi dove gli elettroni possono scappare, il numero di elettroni emessi sarà proporzionale all'integrale, e per il \textit{rate} basta dividere per il tempo $\mathrm{d}t$. Se poi definisco il \textit{rate} per unità di superficie, taglio l'integrale su $\mathrm{d}S = \mathrm{d}x\,\mathrm{d}y$. A formule:
+
+\begin{equation}
+\begin{split}
+    \mathrm{d}R&  = \frac{g\bar{n}\,\mathrm{d}\Gamma}{\mathrm{d}S \mathrm{d}t}\\
+    & = \frac{2\bar{n}}{(2\pi\hbar)^3} \,\frac{\mathrm{d}x\,\mathrm{d}y\,v_z\, \mathrm{d}t \,\mathrm{d}^3 p}{\mathrm{d}S\, \mathrm{d}t} \\
+    & = \frac{2\bar{n}}{(2\pi\hbar)^3} \,\frac{p_z}{m} \,\mathrm{d}^3p
+\end{split}
+\end{equation}
+Integro:
+
+\begin{equation}
+\begin{split}
+        R & = \frac{2}{(2\pi\hbar)^3}\int_{\sqrt{2 m W}}^{+\infty} \frac{p_z\,\mathrm{d}p_z}{m} \iint_{-\infty}^{+\infty}  \frac{\mathrm{d}p_x \,\mathrm{d}p_y}{\exp [(|\mathbf{p}|^2/2m-\mu)/k T]+1} \\
+        & =  \frac{2}{(2\pi\hbar)^3}\int_{\sqrt{2 m W}}^{+\infty} \frac{p_z\,\mathrm{d}p_z}{m} \int_{0}^{+\infty}  \frac{2 \pi p' \,\mathrm{d}p'}{\exp [((p'^2+p_z^2)/2m-\mu)/k T]+1} \\
+        & = \frac{4\pi k T}{(2\pi\hbar)^3} \int_{\sqrt{2 m W}}^{+\infty} \frac{p_z\,\mathrm{d}p_z}{m}\log\left[1+ \exp\left(\frac{\mu-p_z^2/2m}{k T}\right) \right] \\
+        & = \frac{4\pi m k T}{(2\pi\hbar)^3} \int_{W}^{+\infty}\, \mathrm{d}\mathcal{E}_z\,\log\left[1+ \exp\left(\frac{\mu-\mathcal{E}_z}{k T}\right) \right]
+\end{split}
+\label{rate_termoionico}
+\end{equation}
+Per finire bisogna imporre che il potenziale di estrazione sia molto più alto del potenziale chimico (com'è giusto che sia, altrimenti gli elettroni scapperebbero spontaneamente):
+
+\begin{equation}
+    W-\mu \gg k T \quad \iff \quad \exp\left(\frac{\mu-\mathcal{E}_z}{k T}\right) \ll 1
+\end{equation}
+In questa ipotesi sviluppo l'integranda e integro:
+
+\begin{equation}
+    \begin{split}
+        R & \simeq \frac{4\pi m k T}{(2\pi\hbar)^3} \int_{W}^{+\infty}\, \mathrm{d}\mathcal{E}_z\, \exp\left(\frac{\mu-\mathcal{E}_z}{k T}\right) \\
+        & = \frac{4\pi m k^2 T^2}{(2\pi\hbar)^3}\exp\left(\frac{\mu-W}{k T}\right)
+    \end{split}
+\end{equation}
+Dal \textit{rate} trovo la densità di corrente:
+
+\begin{equation}
+    J = e R = \frac{4\pi e m_e k^2}{(2\pi\hbar)^3} T^2 \exp\left(\frac{\mu-W}{k T}\right)
+\end{equation}
+mentre con analoghi conti classici si arriva a
+
+\begin{equation}
+    J_{\text{class}} = \frac{N}{V} \left(\frac{e^2k}{2\pi m}\right)^{1/2} T^{1/2} \exp\left(-\frac{W}{k T}\right)
+\end{equation}
+Anche nel limite $\mu\to 0$, la dipendenza da $T$ è completamente diversa.\\
+Nel caso in cui il campo non sia solo esterno, ma applicato direttamente al metallo, la forma del potenziale cambierebbe per un termine di campo diretto ed uno di carica immagine:
+
+\begin{equation}
+    W \to W - e E z - \frac{e^2}{4z}
+\end{equation}
+A parole, il gradino si piega verso destra e si ammorbidisce, per cui per campi alti prevale l'effetto tunnel quantistico. Inoltre l'altezza della buca varia in generale come
+
+\begin{equation}
+    W \to W - e^{3/2}E^{1/2}
+\end{equation}
+per cui la corrente si può correggere scrivendo
+
+\begin{equation}
+    J \to J \exp\left(\frac{e^{3/2}E^{1/2}}{k T}\right)
+\end{equation}
+
+\newpage
+\subsection{Effetto fotoelettrico}
+
+Consideriamo il caso in cui il gas di elettroni nel metallo viene colpito da fotoni di energia $h\nu$. La condizione sull'impulso nella direzione di fuga diventa 
+
+\begin{equation}
+    \frac{p_z^2}{2m} + h\nu > W
+\end{equation}
+e possiamo ripartire riscrivendo la \eqref{rate_termoionico} con questa condizione:
+
+\begin{equation}
+    R = \frac{4\pi m k T}{(2\pi\hbar)^3} \int_{W-h\nu}^{+\infty}\, \mathrm{d}\mathcal{E}_z\,\log\left[1+ \exp\left(\frac{\mu-\mathcal{E}_z}{k T}\right) \right]
+\end{equation}
+Stavolta però non posso sviluppare in serie, perché potrebbe essere $h\nu \sim W$. Di conseguenza traslo scrivendo
+
+\begin{equation}
+    x \equiv \frac{\mathcal{E}_z - W + h\nu}{k T}
+\end{equation}
+da cui
+
+\begin{equation}
+    R = \frac{4\pi m k^2 T^2}{(2\pi\hbar)^3}\int_{0}^{+\infty}\mathrm{d}x \,\log \left[1+\exp\left(\frac{h(\nu-\nu_0)}{k T} - x\right)\right]
+\end{equation}
+dove ho definito
+
+\begin{equation}
+    h \nu_0 = W - \mu  \approx W - \mathcal{E}_F = \phi
+\end{equation}
+L'integrale in $\mathrm{d}x$ appartiene a una classe di funzioni speciali di Fermi-Dirac:
+
+\begin{equation}
+    \int_{0}^{+\infty}\mathrm{d}x\,\log \left(1+e^{\delta - x}\right) = f_2(e^\delta)
+\end{equation}
+quindi possiamo riscrivere il \textit{rate} come
+
+\begin{equation}
+    R = \frac{4\pi m k^2}{(2\pi\hbar)^3}\, T^2 \, f_2(e^\delta) \quad \text{con}\quad \delta = \frac{h(\nu-\nu_0)}{k T}
+\end{equation}
+Conoscendo il comportamento asintotico di $f_2$, possiamo studiare due casi estremi. Per radiazione molto energetica, il limite è
+
+\begin{equation}
+    h(\nu-\nu_0) \gg k T \,\implies\, e^\delta \gg 1 \,\implies\, f_2(e^\delta) \approx \frac{\delta^2}{2}
+\end{equation}
+e la corrente non dipende dalla temperatura, perché l'energia del fotone incidente è molto più grande del potenziale di estrazione $W$:
+
+\begin{equation}
+    J \approx \frac{m e}{\hbar}(\nu-\nu_0)^2
+\end{equation}
+Nel caso di radiazione poco energetica, con $\nu < \nu_0$, la stima è
+
+\begin{equation}
+    h|\nu-\nu_0| \gg k T \,\implies\, e^\delta \ll 1 \,\implies\, f_2(e^\delta) \approx e^\delta
+\end{equation}
+da cui l'espressione per la corrente, che è una correzione alla corrente termoionica:
+
+\begin{equation}
+    J \approx \frac{4\pi m k^2}{(2\pi\hbar)^3}\, T^2 \, \exp\left(\frac{h\nu-\phi}{k T}\right)
+\end{equation}
+
+\section{Gas di Bose}
+
+\subsection{Il condensato di Bose-Einstein}
+
+Ricordiamo che i bosoni sono descritti dalla statistica di Bose-Einstein, e che il potenziale chimico dev'essere negativo:
+
+\begin{equation}
+    \bar{n}(\mathcal{E}) = \frac{1}{\exp [(\mathcal{E}-\mu)/ k T] -1} \quad \text{con} \quad \mu < 0
+\end{equation}
+Studiando quest'equazione possiamo fare due osservazioni sul gas di bosoni, nel limite $\mu \to 0$:
+
+\begin{itemize}
+    \item a temperatura fissata, c'è un numero massimo consentito di particelle oltre il quale dovremmo avere $\mu > 0$;
+    \item viceversa, a $N$ fissato, c'è un limite inferiore imposto alla temperatura dall'ipotesi sul segno del potenziale chimico.
+\end{itemize}
+Questi vincoli non hanno senso fisico, in quanto ci aspettiamo di poter osservare un gas a qualsiasi temperatura e con qualsiasi numero di particelle. Per vedere perché, proviamo a calcolare $N$ a temperatura fissata, mandando la somma all'integrale:
+
+\begin{equation}
+    N = \sum_q \bar{n}_q
+    = \frac{4\pi V g \sqrt 2 m^{3/2}}{(2 \pi \hbar)^3} \int_{0}^{\infty} \frac{\mathcal{E}^{1/2}\,\mathrm{d}\mathcal{E}} {\exp [(\mathcal{E}-\mu)/ k T] - 1}
+\end{equation}
+Ora imponiamo che sia
+
+\begin{equation}
+    \mu \impongo 0 \qquad \qquad\mathcal{E} \equiv k T x
+\end{equation}
+
+\begin{equation}
+    N = \frac{4\pi V g \sqrt 2 m^{3/2}}{(2 \pi \hbar)^3} (k T)^{3/2} \int_{0}^{\infty} \frac{\sqrt{x}\,\mathrm{d}x} {e^x - 1}
+\end{equation}
+Integrali di questa forma sono esprimibili in termini della funzione $\Gamma$ di Eulero e della $\zeta$ di Riemann:
+
+\begin{equation}
+    \int_{0}^{\infty} \frac{x^n\,\mathrm{d}x} {e^x - 1} = \Gamma(n+1)\,\zeta(n+1)
+\end{equation}
+La fisica tornerebbe se quest'integrale divergesse; infatti, nel limite $\mu \to 0$, il potenziale chimico non può più cambiare per permetterci di aggiungere altre particelle a temperatura fissata. Invece l'integrale converge ad un valore finito:
+
+\begin{equation}
+    \int_{0}^{\infty} \frac{\sqrt{x}\,\mathrm{d}x} {e^x - 1} = 2.31
+\end{equation}
+Quindi i problemi emergono ad una densità critica
+
+\begin{equation}
+   \left(\frac{N}{V}\right)_c = \frac{2.612}{\Lambda^3} 
+\end{equation}
+o viceversa, ad $N$ fissato, scendendo sotto una temperatura critica
+
+\begin{equation}
+ T_c = \frac{1}{2.31 \, \text{mK}}\,\left(\frac{N}{V}\right)_c\frac{(2\pi\hbar)^2}{(4\pi\sqrt{2})^{2/3}}
+\end{equation}
+Ipotizziamo che il nostro errore emerga nel momento in cui mandiamo le somme ad integrali; ricordiamo che la condizione per eseguire il limite è
+
+\begin{equation}
+    k T \gg \frac{\hbar^2}{2m} \left(\frac{2\pi}{L}\right)^2
+\end{equation}
+che in questo caso si traduce in
+
+\begin{equation}
+    N^{2/3} \gg 2.31 \times \frac{(4\pi\sqrt{2})^{2/3}}{2} \approx 7.8 
+\end{equation}
+ed in casi concreti questa condizione è sempre soddisfatta. In realtà, il problema emerge sì quando mandiamo le somme ad integrali, ma in combinazione col fatto che la densità in energia tende a zero insieme all'energia stessa:
+
+\begin{equation}
+    \sum \to \int \quad \text{con}\quad\lim_{\mathcal{E}\to 0} \rho(\mathcal{E}) = 0 
+    \label{sumtoint}
+\end{equation}
+Infatti in questo modo trascuriamo completamente le particelle nello stato fondamentale, che però diventano moltissime sopra la densità critica a $T$ fissato o sotto la temperatura critica a $N$ fissato; si tratta effettivamente di una transizione di fase in uno stato detto \textit{condensato di Bose-Einstein} o BEC. Il numero di particelle nel \textit{ground state} si scrive
+
+\begin{equation}
+    \bar{n}_0 = \frac{1}{\exp(-\mu/k T) - 1}
+\end{equation}
+e, coerentemente con il senso fisico, diverge per $\mu \to 0$. Il numero prima erroneamente identificato con $N$ è in realtà il numero $N^{*}$ di particelle negli altri stati permessi:
+
+\begin{equation}
+    N^{*} = N - N_0 = \int_{0}^{\infty} \frac{\rho(\mathcal{E})\,\mathrm{d}\mathcal{E}} {\exp (\mathcal{E}/ k T) - 1} = N \left(\frac{T}{T_c}\right)^{3/2}
+\end{equation}
+da cui
+
+\begin{equation}
+    N_0 = N \left(1-\left(\frac{T}{T_c}\right)^{3/2}\right)
+\end{equation}
+Notiamo che in due dimensioni non c'è condensazione, perché la densità di stati è costante in energia:
+
+\begin{equation}
+    \mathrm{d}\mathcal{E} = \frac{p\,\mathrm{d}p}{m} \quad \implies \quad \mathrm{d}^2 p = 2\pi p\,\mathrm{d}p = 2\pi m\, \mathrm{d}\mathcal{E}
+\end{equation}
+Calcolo l'energia media nell'ipotesi $\mu \approx 0$ e sotto la temperatura critica (ricordiamo che le particelle nel condensato hanno energia nulla):
+
+\begin{equation}
+    \begin{split}
+        E & = \int_{0}^{\infty} \frac{\rho(\mathcal{E})\,\mathcal{E}\,\mathrm{d}\mathcal{E}}{\exp(\mathcal{E}/k T) -1} \\
+        & = \frac{4\pi V g \sqrt 2 m^{3/2}}{(2 \pi \hbar)^3} (k T)^{3/2} k T \int_{0}^{\infty} \frac{x^{3/2}\,\mathrm{d}x} {e^x - 1} \\
+        & \simeq 0.77 \times N k T \left(\frac{T}{T_c}\right)^{3/2} \\
+        & \propto T^{5/2}
+    \end{split}
+\end{equation}
+da cui la capacità termica:
+
+\begin{equation}
+    c_V \simeq 1.9 \times N k \left(\frac{T}{T_c}\right)^{3/2} = 1.9 \times N^{*}k \propto T^{3/2}
+\end{equation}
+D'altronde, per $T$ grande, la capacità termica deve tendere alla costante $3 N k/2$. Il comportamento cambia bruscamente in prossimità della temperatura critica:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.6]{bec1.jpg}
+\end{figure}
+
+Per la pressione usiamo la formula \eqref{energia-pressione} che vale per tutti i gas perfetti a dispersione quadratica:
+
+\begin{equation}
+    P = \frac{2}{3}\frac{E}{V} \simeq 0.513 \times\frac{N k T}{V}\left(\frac{T}{T_c}\right)^{3/2}
+\end{equation}
+che, essendo calcolata a $\mu(P,T) = 0$, identifica la curva di coesistenza dello stato gassoso non degenere e del BEC:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{bec2.jpg}
+\end{figure}
+
+\subsection{Oscillatori in una scatola}
+
+Consideriamo un gas di oscillatori armonici. L'hamiltoniano di un singolo oscillatore è
+
+\begin{equation}
+    H = \frac{\mathbf{p}^2}{2m} + \frac{m \omega^2 \mathbf{x}^2}{2} 
+\end{equation}
+da cui per equipartizione abbiamo subito l'energia media classica:
+
+\begin{equation}
+    E = 3 N k T
+\end{equation}
+Quantisticamente, invece, l'energia per un singolo oscillatore (stavolta unidimensionale) è
+
+\begin{equation}
+    \mathcal{E}_n = \left(n+\frac{1}{2}\right)\hbar \omega
+    \label{energia_oscillatore}
+\end{equation}
+da cui la funzione di partizione di singola particella:
+
+\begin{equation}
+\begin{split}
+    \mathcal{Z}_1 & = \sum_0^{\infty} \exp\left[-\left(n+\frac{1}{2}\right)\frac{\hbar\omega}{k T}\right] \\
+    & = \frac{1}{2\sinh(\hbar\omega/k T)}
+\end{split}
+\end{equation}
+A partire da $\mathcal{Z}_1$ ottengo l'energia media per oscillatore, che dev'essere uguale all'energia calcolata a partire dalla \eqref{energia_oscillatore} con $n = \bar{n}$:
+
+\begin{equation}
+    E = \frac{1}{2}\hbar \omega +\frac{\hbar\omega}{\exp(\hbar\omega/k T)-1} = \left(\bar{n}+\frac{1}{2}\right)\hbar \omega 
+\end{equation}
+Dall'ultima espressione si capisce che gli oscillatori seguono la statistica B-E con $\mu = 0$:
+
+\begin{equation}
+    \bar{n}(\omega) = \frac{1}{\exp(\hbar\omega/k T)-1}
+\end{equation}
+
+\subsection{Il corpo nero}
+
+Possiamo utilizzare il gas di oscillatori come modello per il campo elettromagnetico: vediamo il campo come un oscillatore con tanti livelli popolati secondo la statistica $\bar{n}$, oppure come un livello unico popolato da $\bar{n}$ fotoni. Il fatto che $\mu$ sia nullo indica che non c'è una legge di conservazione per il numero totale di quasiparticelle nell'universo: posso creare e distruggere fotoni secondo necessità.\\
+Se metto il gas in una scatola con pareti perfettamente assorbenti (i.e. condizioni di annullamento ai bordi), ovvero un corpo nero, la legge di dispersione è immediatamente
+
+\begin{equation}
+    \omega = c k \quad\implies\quad \mathcal{E} = c p
+\end{equation}
+e utilizzandola riscrivo l'elementino differenziale di spazio delle fasi:
+
+\begin{equation}
+    \mathrm{d}\Gamma = 2V\,\frac{4\pi p^2\,\mathrm{d}p}{(2\pi\hbar)^3} = V\,\frac{\omega^2\,\mathrm{d}\omega}{\pi^2 c^3} = \rho(\omega)\,\mathrm{d}\omega
+\end{equation}
+Il fattore 2 deriva dal fatto che esistono due possibili modi di propagazione linearmente indipendenti per il campo (circolare destra e sinistra) associate allo spin del fotone, che può assumere valori $\pm 1$. Ricavo immediatamente la densità in energia per unità di volume, moltiplicando l'energia del singolo fotone per il numero di occupazione e per la densità a meno di $V$ (mi dimentico dell'energia di punto zero $\hbar\omega/2$ che non è misurabile e farebbe divergere l'energia totale):
+
+\begin{equation}
+    \begin{split}
+        u(\omega)\,\mathrm{d}\omega & = \frac{\rho(\omega)}{V}\,\bar{n}(\omega)\,\hbar\omega\,\mathrm{d}\omega \\
+        & = \frac{\hbar\omega^3}{\exp(\hbar\omega/k T)-1}\,\frac{\mathrm{d}\omega}{\pi^2 c^3} 
+    \end{split}
+    \label{planck}
+\end{equation}
+La \eqref{planck} è la nota legge di Planck per la radiazione di corpo nero. La frequenza a cui occorre il massimo della distribuzione aumenta con la temperatura, e così il valore del massimo. Bisogna tener conto della radiazione di corpo nero quando può interferire con la parte di spettro che si sta studiando (e.g. rumore nella spettroscopia nell'infrarosso). Il Sole è un ottimo corpo nero a 6000 K.\\
+Integrando su tutte le frequenze ottengo l'energia totale del corpo nero in funzione della temperatura:
+
+\begin{equation}
+    E = \int_0^{\infty} u(\omega)\,\mathrm{d}\omega = \sigma T^4
+\end{equation}
+La $\sigma$ è detta costante di Stefan-Boltzmann. Il calore specifico scala come 
+
+\begin{equation}
+    c_V = \frac{\partial E}{\partial T} \propto T^3
+\end{equation}
+e curiosamente diverge con $T$. La spiegazione è semplice: $N$ non è fissato e $\omega$ non ha limite superiore, quindi possiamo aggiungere al sistema un numero qualsiasi di quasiparticelle con energia grande a piacere; in altre parole, non vediamo mai il limite classico per alte temperature, perché gli oscillatori che trattiamo sono infiniti. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.08]{EffectiveTemperature_300dpi_e.png}
+    \caption{Spettro di Planck per la radiazione solare.}
+\end{figure}
+
+\subsection{Modelli di Einstein e Debye}
+
+Assumiamo di poter trattare gli atomi in un cristallo come oscillatori armonici indipendenti. Classicamente avremmo 
+
+\begin{equation}
+    c_V = 3 N k
+\end{equation}
+che è detta legge di Dulong e Petit. Sperimentalmente però emerge che $c_V \to 0$ quando $T \to 0$; dalla trattazione quantistica che abbiamo visto per il gas di oscillatori l'energia si può scrivere come
+
+\begin{equation}
+    E = E_0 + 3N\,\frac{\hbar\omega}{\exp(\hbar\omega/k T)-1}
+    \label{modello di einstein}
+\end{equation}
+ottenendo per il calore specifico
+
+\begin{equation}
+    \lim_{T\to 0} c_V = 0 \qquad\qquad \lim_{T\to \infty} c_V = 3 N k
+\end{equation}
+com'è giusto che sia. Di nuovo, questo modello (dovuto ad Einstein) si trova in disaccordo con la realtà sperimentale: il calore specifico, secondo le misure, va a zero come $T^3$, e non esponenzialmente come previsto dalla \eqref{modello di einstein}. Il problema è nel trattare gli oscillatori come indipendenti: facendo questa assunzione, dobbiamo accettare che $\omega$ non dipenda dalla densità, e quindi che l'energia non dipenda dal volume; ne segue che la compressibilità è infinita, fatto che non ha senso fisicamente. \\
+In un modello più realistico (detto di Debye) gli oscillatori sono accoppiati, e le quasiparticelle che descrivono il sistema (dette \textit{fononi}) sono i modi di oscillazione collettivi degli atomi. La lunghezza d'onda è limitata superiormente dalla dimensione del solido, e inferiormente dal passo del reticolo cristallino. \\
+Trattiamo il caso $k\to 0$, ovvero di grandi lunghezze d'onda, in cui possiamo approssimare il reticolo come continuo. Ricordiamo le leggi del mezzo continuo, ovvero l'equazione di continuità per la densità di massa e la seconda legge di Newton:
+
+\begin{equation}
+    \begin{split}
+        &\frac{\partial \rho}{\partial t} + \nabla(\rho \mathbf{v}) = 0 \\
+        &\rho \frac{\partial \mathbf{v}}{\partial t} + \nabla P = 0
+    \end{split}
+\end{equation}
+Consideriamo il caso in cui pressione e densità si discostano di poco dall'equilibrio:
+
+\begin{equation}
+    P = P_0 + P' \qquad \rho = \rho_0 + \rho' \qquad \mathbf{v} = \mathbf{v}'
+\end{equation}
+Sostituendo ottengo:
+
+\begin{equation}
+    \begin{split}
+        & \nabla P' + \rho_0 \frac{\partial \mathbf{v}'}{\partial t} = 0 \\
+        & \frac{\partial \rho'}{\partial t} + \rho_0 \nabla \cdot \mathbf{v}' = 0
+    \end{split}
+\end{equation}
+Assumo anche che la densità dipenda solo dalla pressione, e non dalla temperatura. In questa ipotesi posso svilupparla:
+
+\begin{equation}
+    \rho \simeq \rho(P_0) + \frac{\partial \rho}{\partial P} P'
+\end{equation}
+e avendo $\rho(P_0) = \rho_0$ ottengo per la variazione di densità
+
+\begin{equation}
+    \rho ' = \frac{\partial \rho}{\partial P} P' \equiv \frac{P'}{c^2}
+\end{equation}
+dove ho definito 
+
+\begin{equation}
+    c^2 = \frac{\partial P}{\partial \rho} = \frac{1}{k \rho}
+\end{equation}
+dove $k = k_T = k_V$ è la compressibilità. Sostituendo di nuovo ottengo
+
+\begin{equation}
+\begin{split}
+    & c^2 \nabla \rho' + \rho_0 \frac{\partial \mathbf{v}}{\partial t} = 0 \\
+    & \frac{\partial \rho'}{\partial t} + \rho_0 \nabla \cdot \mathbf{v}' = 0
+\end{split}
+\end{equation}
+e rielaborando arrivo all'equazione di D'Alembert per la variazione di densità:
+
+\begin{equation}
+     \frac{1}{c^2}\frac{\partial^2\rho'}{\partial t^2} - \nabla^2\rho' = 0
+\end{equation}
+Una base per le soluzioni sono le onde piane
+
+\begin{equation}
+    \rho'(t,\mathbf{x}) \propto e^{-i(\omega t - \mathbf{q}\cdot\mathbf{x})}
+\end{equation}
+con legge di dispersione
+
+\begin{equation}
+    \omega = c q
+\end{equation}
+I fononi sono bosoni con legge di dispersione uguale a quella dei fotoni in una scatola. Di conseguenza la densità spettrale è identica a meno di un fattore di molteplicità; dobbiamo considerare, oltre ai due modi di propagazione trasversi, il modo di propagazione longitudinale, che avrà in generale una velocità diversa:
+
+\begin{equation}
+    \begin{split}
+        u(\omega)\,\mathrm{d}\omega & = \frac{\hbar \omega}{\exp(\hbar\omega/k T)-1}\,\rho(\omega)\,\mathrm{d}\omega \\
+        & = \left(\frac{1}{c_L^3}+\frac{2}{c_T^3}\right)\frac{V\,\hbar \omega^3}{\exp(\hbar\omega/k T)-1}\,\frac{\mathrm{d}\omega}{2\pi^2}
+    \end{split}
+\end{equation}
+Possiamo riscrivere la densità in energia considerando una velocità media per comodità:
+
+\begin{equation}
+    u(\omega)\,\mathrm{d}\omega = \frac{3V}{2\pi^2\bar{c}^3}\frac{\hbar \omega^3\,\mathrm{d}\omega}{\exp(\hbar\omega/k T)-1}
+\end{equation}
+L'energia totale per basse temperature si ottiene subito integrando nell'ipotesi che il contributo della coda dello spettro sia molto piccolo, che si traduce in una condizione che lega la temperatura alla spaziatura del reticolo:
+
+\begin{equation}
+    k T \ll \hbar\omega_{\text{max}} = \frac{h c}{\lambda_{\text{min}}}
+\end{equation}
+Con questa assunzione possiamo estendere l'integrale su tutte le frequenze:
+
+\begin{equation}
+    E = E_0 + \int_0^{\infty} u(\omega)\,\mathrm{d}\omega \propto T^4
+\end{equation}
+In accordo con le misure, il calore specifico va a zero come $T^3$. \\
+In questa trattazione non abbiamo tenuto conto dei modi ad alta frequenza, ma sappiamo che ad alta temperatura il calore specifico dipende solo dal numero totale dei modi, e non dalla loro distribuzione. Possiamo quindi estendere l'espressione trovata per la densità spettrale fino ad una frequenza di \textit{cutoff}, detta frequenza di Debye, definita da
+
+\begin{equation}
+    3N = \int_0^{\omega_m} \rho(\omega)\,\mathrm{d}\omega
+\end{equation}
+La frequenza di Debye è una proprietà del materiale e dipende dalla velocità media del suono:
+
+\begin{equation}
+    \omega_m = 2\pi\bar{c}\left(\frac{3N}{4\pi V}\right)^{1/3}
+\end{equation}
+
+\section{Equazione del trasporto di Boltzmann}
+
+Il teorema di Liouville per un sistema conservativo caratterizzato da una distribuzione $f$ nello spazio delle fasi si può scrivere
+
+\begin{equation}
+    f(t+\mathrm{d}t, \mathbf{x}+\mathrm{
+    d}\mathbf{x},  \mathbf{v}+\mathrm{
+    d}\mathbf{v}) = f(t,\mathbf{x},\mathbf{v})
+\end{equation}
+Se il sistema è lasciato poco fuori equilibrio, possiamo introdurre una quantità che ne tenga conto. Richiediamo che:
+
+\begin{itemize}
+    \item sia proporzionale alla distanza del sistema dall'equilibrio;
+    \item faccia tendere il sistema verso l'equilibrio;
+    \item tenga conto di un tempo caratteristico che modellizzi le collisioni tra particelle che fisicamente ristabiliscono l'equilibrio.
+\end{itemize}
+La forma più semplice che può assumere è quella della \textit{derivata collisionale}:
+
+\begin{equation}
+    \left(\frac{\partial f}{\partial t}\right)_{\text{coll}} = -\frac{f-f_0}{\tau_c}
+    \label{derivata collisionale}
+\end{equation}
+dove $f_0$ è la distribuzione all'equilibrio e $\tau_c$ il tempo collisionale. In assenza di campi, la \eqref{derivata collisionale} si risolve subito ottenendo:
+
+\begin{equation}
+    f(t) - f_0 = [f(0)-f_0]\, e^{-t/\tau_c}
+\end{equation}
+In scenari più complessi, $\tau_c$ potrebbe dipendere dall'impulso delle particelle o da altre variabili del sistema.\\
+Il teorema di Liouville si può generalizzare come
+
+\begin{equation}
+     f(t+\mathrm{d}t, \mathbf{x}+\mathrm{
+    d}\mathbf{x},  \mathbf{v}+\mathrm{
+    d}\mathbf{v}) - f(t,\mathbf{x},\mathbf{v}) =  \left(\frac{\partial f}{\partial t}\right)_{\text{coll}} \mathrm{d}t
+\end{equation}
+da cui possiamo scrivere la cosiddetta \textit{equazione del trasporto di Boltzmann}:
+
+\begin{equation}
+    \frac{\partial f}{\partial t} + \frac{\mathrm{d}\mathbf{r}}{\mathrm{d}t}\cdot \nabla_\mathbf{r} f + \frac{\mathrm{d}\mathbf{v}}{\mathrm{d}t}\cdot \nabla_\mathbf{v} f = \left(\frac{\partial f}{\partial t}\right)_{\text{coll}}
+    \label{trasporto di boltzmann}
+\end{equation}
+La ricerca di soluzioni stazionarie si traduce matematicamente ponendo $\partial_t f = 0$ nella \eqref{trasporto di boltzmann}. \\
+Il problema unidimensionale (e.g. campo elettrico lungo $\hat{x}$) si scrive
+
+\begin{equation}
+    v_x \frac{\partial f}{\partial x} + \dot{v}_x \frac{\partial f}{\partial v_x} = -\frac{f-f_0}{\tau_c}
+\end{equation}
+ovvero, con $a = \dot{v}_x$
+
+\begin{equation}
+    f = f_0 - \tau_c \left(a \,\frac{\partial f}{\partial v_x} + v\, \frac{\partial f}{\partial x}\right)
+\end{equation}
+Assumiamo che il sistema sia poco lontano dall'equilibrio, sviluppando
+
+\begin{equation}
+    f \simeq f_0 + \Delta
+\end{equation}
+Così compiamo un errore al second'ordine nelle derivate, e l'equazione diventa 
+
+\begin{equation}
+    f = f_0 - \tau_c \left(a \,\frac{\partial f_0}{\partial v_x} + v\, \frac{\partial f_0}{\partial x}\right)
+\end{equation}
+
+\subsection{Conducibilità elettrica}
+
+Consideriamo un gas di elettroni portato fuori equilibrio da un debole campo elettrico, e utilizziamo l'equazione del trasporto per calcolarne la conducibilità elettrica. La trattazione sarà semiclassica perché assumiamo che la lunghezza d'onda di De Broglie degli elettroni sia molto più piccola della lunghezza caratteristica su cui variano la statistica ed il potenziale elettrico; gli elettroni sono trattati come particelle. Da argomenti di parità, si vede subito che la correzione alle autoenergie svanisce al prim'ordine in teoria delle perturbazioni; i.e., per piccoli campi non cambia la struttura dei livelli energetici. \\
+Per $f_0$ assumiamo che gli elettroni siano localmente distribuiti secondo la Fermi-Dirac:
+
+\begin{equation}
+    f_0 = \bar{n} = \frac{1}{\exp[(\mathcal{E}-\mu)/ k T] + 1}
+\end{equation}
+e lavoriamo nell'assunzione che il potenziale chimico e la temperatura siano uniformi nello spazio:
+
+\begin{equation}
+    \frac{\partial \mu}{\partial \mathbf{x}} = \frac{\partial T}{\partial \mathbf{x}} = 0
+\end{equation}
+Ricordiamo che l'energia è ancora indipendente da $\mathbf{x}$ al prim'ordine perturbativo. Calcolo le derivate che mi occorrono:
+
+\begin{equation}
+\begin{split}
+     & \frac{\partial f_0}{\partial x} =\frac{\partial f_0}{\partial \mu} \frac{\partial \mu}{\partial x} + \frac{\partial f_0}{\partial T}  \frac{\partial T}{\partial x} = 0 \\
+     & \frac{\partial f_0}{\partial v_x} = \frac{\partial f_0}{\partial \mathcal{E}}\frac{\partial \mathcal{E}}{\partial v_x} = m v_x\, \frac{\partial f_0}{\partial \mathcal{E}}
+\end{split}
+\end{equation}
+da cui, usando $a = e E/m$
+
+\begin{equation}
+    f = \bar{n} - \tau_c \,eEv_x\, \frac{\partial \bar{n}}{\partial \mathcal{E}}
+\end{equation}
+Mettiamoci nel limite di basse temperature $T \sim 0$, in cui la F-D è un gradino e dunque vale
+
+\begin{equation}
+    \frac{\partial \bar{n}}{\partial \mathcal{E}} = - \delta(\mathcal{E}-\mathcal{E}_F) 
+\end{equation}
+La densità di corrente differenziale è data da
+
+\begin{equation}
+    \mathrm{d}J = (2s+1)\, e v_x f \frac{\mathrm{d}\Gamma}{\mathrm{d}^3 x} = 2 e v_x f \frac{d^3 p}{h^3} 
+\end{equation}
+È il momento di integrare: 
+
+\begin{equation}
+    \begin{split}
+        J & = 2 e \int v_x f  \frac{d^3 p}{h^3} \\
+        & = 2 e \int  v_x \,\bar{n} \, \frac{d^3 p}{h^3} + 2 e^2 E \tau_c \int v_x^2\, \delta(\mathcal{E}-\mathcal{E}_F)\frac{d^3 p}{h^3}  \\
+    \end{split}
+\end{equation}
+Il primo pezzo svanisce perché l'integranda è dispari in $v_x$ (d'altronde rappresenta la corrente in assenza di campi). 
+
+\begin{equation}
+    \begin{split}
+        J & = 2 e^2 E \tau_c \int v^2 \cos^2\theta \,\delta(\mathcal{E}-\mathcal{E}_F) \,\frac{2 \pi p^2 \,\mathrm{d}p \,\sin\theta \,\mathrm{d}\theta}{h^3} \\
+        & = \frac{2 e^2 E\tau_c}{4\pi^2 \hbar^3} \int \frac{2\mathcal{E}}{m} \,\cos^2 \theta \, \delta(\mathcal{E}-\mathcal{E}_F) \,p^2\,\mathrm{d}p \,\mathrm{d}\cos\theta \\
+        &  = \frac{2 e^2 E \tau_c}{3m\pi^2\hbar^3} \int \mathcal{E}\, \delta(\mathcal{E}-\mathcal{E}_F) \,p^2 \,\mathrm{d}p \\
+        & = \frac{2 e^2 E \tau_c}{3\pi^2\hbar^3}\,\sqrt{2m}\int \mathcal{E}^{3/2}\,\delta(\mathcal{E}-\mathcal{E}_F)\,\mathrm{d}\mathcal{E} \\
+         & = \frac{2 e^2 E \tau_c}{3\pi^2\hbar^3}\,\sqrt{2m}\, \mathcal{E}_F^{3/2}\\
+         & = \frac{e^2 \tau_c \,N}{m V} \,E
+    \end{split}
+\end{equation}
+da cui infine la conducibilità:
+
+\begin{equation}
+    \sigma = \frac{J}{E} = \frac{e^2 \tau_c}{m}\,\frac{N}{V}
+\end{equation}
+È interessante notare che seguendo il procedimento più stupido possibile, ovvero considerare variazioni di velocità date da 
+
+\begin{equation}
+    \Delta v = a \tau_c = \frac{e E}{m} \tau_c
+\end{equation}
+si arriva subito al risultato esatto ottenuto tramite i contacci semiclassici:
+
+\begin{equation}
+    J = \frac{N e}{V} \Delta v = \frac{e^2 \tau_c \,N}{m V} \,E
+\end{equation}
+
+\subsection{Conducibilità termica}
+La conducibilità termica $\kappa$ è definita da
+
+\begin{equation}
+    J_Q = - \kappa \,\frac{\mathrm{d}T}{\mathrm{d}x}
+\end{equation}
+Ispirati dal risultato di sopra, vorremmo scrivere
+
+\begin{equation}
+    J_Q = \int \mathcal{E}\,f v_x \,\frac{\mathrm{d}^3 p}{h^3} \quad \text{(?)}
+\end{equation}
+ma quest'espressione terrebbe conto della corrente fisica di particelle, mentre noi siamo interessanti al solo trasporto di entropia $T\mathrm{d}S = \mathrm{d}\mathcal{E}-\mu \mathrm{d}N$. Di conseguenza la scriviamo correttamente come
+
+\begin{equation}
+ J_Q = \int (\mathcal{E}-\mu)\,f v_x \,\frac{\mathrm{d}^3 p}{h^3}
+\end{equation}
+L'assunzione di temperatura uniforme ovviamente cade (altrimenti non avremmo corrente termica); in assenza di campi vale $a = 0$. L'equazione del trasporto poco fuori equilibrio si scrive quindi
+
+\begin{equation}
+    f = f_0 - \tau_c \,v_x \,\frac{\partial f_0}{\partial T}\frac{\partial T}{\partial x}
+\end{equation}
+Non va più bene usare il gradino al posto della F-D (l'integrale farebbe zero). Tramite contacci con l'espressione completa della statistica si ottiene
+
+\begin{equation}
+    J_Q = - \frac{\mathrm{d}T}{\mathrm{d}x}\,k_B^2 T \frac{\pi^2}{3} \frac{N}{V} \frac{\tau_c}{m}
+\end{equation}
+e quindi
+
+\begin{equation}
+    \kappa = \frac{\pi^2}{3} \frac{N}{m V} k_B^2 T \tau_c
+\end{equation}
+Il rapporto tra conducibilità elettrica e termica in un gas di elettroni dipende, a meno della temperatura, da sole costanti fondamentali; è dato dalla relazione di Wiedmann-Franz:
+
+\begin{equation}
+\frac{\kappa}{T\sigma} = \frac{\pi^2}{3} \left(\frac{k_B}{e}\right)^2 
+\end{equation}
+
+\section{Fluttuazioni}
+
+Le fluttuazioni del numero di particelle di un gas perfetto sono date in generale da
+
+\begin{equation}
+    \langle(\Delta N)^2\rangle = - k T \left(\frac{\partial^2 \Omega}{\partial \mu^2}\right)_{TV}
+\end{equation}
+e per il numero di occupazione del singolo singolo stato
+
+\begin{equation}
+    \langle(\Delta n)^2\rangle = - k T \left(\frac{\partial^2 \Omega_q}{\partial \mu^2}\right)_{TV}
+\end{equation}
+Utilizzando l'identità
+
+\begin{equation}
+    \bar{n}_q = -\frac{\partial \Omega_q}{\partial \mu}
+\end{equation}
+la precedente diventa
+
+\begin{equation}
+     \langle(\Delta n)^2\rangle =  k T \left(\frac{\partial \bar{n}_q}{\partial \mu}\right)_{TV}
+\end{equation}
+Vediamo che forma esplicita assume la varianza di $n$ per i sistemi che seguono la F-D o la B-E:
+
+\begin{equation}
+    \begin{split}
+        \langle(\Delta n)^2\rangle & = k T \frac{\partial \bar{n}}{\partial \mu} \\
+        & = \frac{\exp[(\mathcal{E}-\mu)/k T]}{(\exp[(\mathcal{E}-\mu)/k T]\pm 1)^{2}} \\
+        & = \bar{n} \mp \bar{n}^2
+    \end{split}
+\end{equation}
+Il segno $-$ nell'ultima espressione è per i fermioni, il $+$ per i bosoni. Per quest'ultimi vale quindi $\langle (\Delta n)^2\rangle \propto \bar{n}^2$. Nel caso dei fotoni possiamo arrivarci così: consideriamo $N$ sorgenti che emettono radiazione non coerente che fa interferenza in un punto dello spazio; il campo elettrico è dato, nel caso semplice di ampiezze uguali, da 
+
+\begin{equation}
+    E = \sum_{j=1}^{N}\varepsilon\,e^{i\phi_j}
+\end{equation}
+Il numero di fotoni è proporzionale all'intensità media della radiazione, che a sua volta è proporzionale al valor medio del modulo quadro del campo:
+
+\begin{equation}
+    \begin{split}
+        |E|^2 & = \sum_{j=1}^{N}\varepsilon\,e^{i\phi_j} \sum_{l=1}^{N}\varepsilon\,e^{-i\phi_l} \\
+        & = \varepsilon^2 \left(N + \sum_{l\neq j}^{N}e^{i(\phi_j-\phi_l)} \right) \\
+        & = \varepsilon^2 \left(N + 2 \sum_{j>l}^{N} \cos(\phi_j-\phi_l)\right)
+    \end{split}
+\end{equation}
+Il secondo termine media a zero, quindi 
+
+\begin{equation}
+    \bar{n} \propto \langle|E|^2\rangle = N \varepsilon^2
+\end{equation}
+Per il valor medio di $n^2$ abbiamo invece
+
+\begin{equation}
+    \begin{split}
+        \langle n^2 \rangle & \propto \langle |E|^4 \rangle \\
+        & = \varepsilon^4 \left\langle \left(N + 2 \sum_{j>l}^{N} \cos(\phi_j-\phi_l)\right)^2\right\rangle \\
+        & = \varepsilon^4 \left( N^2 + 4N \left\langle \sum_{j>l}^{N} \cos(\phi_j-\phi_l) \right\rangle + 4 \left\langle \sum_{j>l}^{N} \cos^2(\phi_j-\phi_l) \right\rangle \right)\\
+        & = \varepsilon^4 \left(N^2 + 4\, \frac{1}{2}\frac{N(N-1)}{2} \right) \\
+        & = \varepsilon^4 (2N^2-N) \sim 2\varepsilon^4 N^2
+    \end{split}
+\end{equation}
+Quindi riotteniamo lo stesso risultato di sopra:
+
+\begin{equation}
+    \langle (\Delta n)^2 \rangle \propto \varepsilon^4 N^2 = \bar{n}^2
+\end{equation}
+Consideriamo ora di fare questo conto non su un singolo stato, ma su $g$ cellette dello spazio delle fasi. Assumendo che cellette vicine abbiano energie simili e quindi numeri di occupazione analoghi, possiamo scrivere per il numero di occupazione del gruppo di celle
+
+\begin{equation}
+    \bar{N} = g \bar{n}
+\end{equation}
+Le fluttuazioni saranno date quindi da
+
+\begin{equation}
+    \begin{split}
+        \langle (\Delta N)^2 \rangle & = k T \left(\frac{\partial \bar{N}}{\partial \mu}\right)_{TV} = k T g \left(\frac{\partial \bar{n}}{\partial \mu}\right)_{TV} \\
+        & = g(\bar{n}\pm \bar{n}^2) = \bar{N} \pm \frac{\bar{N}^2}{g}
+    \end{split}
+\end{equation}
+Il contributo quadratico alle fluttuazioni è soppresso dal numero di cellette considerate; i fenomeni di interferenza svaniscono quando si considera radiazione totalmente incoerente nello spazio e nel tempo. \\
+Per fare una stima del numero $g$ di celle in una situazione sperimentale, consideriamo di avere una sorgente di aera $S$ e di misurare entro un angolo solido $\Delta \Omega$. Detto $T$ il tempo di misura, il volume nello spazio interessato dai fotoni sarà dato da
+
+\begin{equation}
+    V = S c T
+\end{equation}
+mentre la larghezza negli impulsi dipenderà dalla larghezza di banda, a sua volta inversamente proporzionale al tempo di coerenza della radiazione:
+
+\begin{equation}
+    \Delta p = \frac{h}{c}\,\Delta \nu \sim \frac{h}{c\,\tau_c}
+\end{equation}
+da qui arriviamo a scrivere
+
+\begin{equation}
+    g = \frac{p^2\, \Delta p\,\Delta\Omega}{h^3} = \frac{S\,\Delta\Omega}{\lambda^2}\,\frac{T}{\tau_c} \equiv \frac{S'}{A_c}\,\frac{T}{\tau_c}
+\end{equation}
+Nell'ultima espressione si vede esplicitamente che $g$ è prodotto di un fattore di coerenza spaziale per un fattore di coerenza temporale; in pratica, $g$ può essere stimato a partire dalle fluttuazioni e dà informazioni sulle proprietà statistiche della radiazione in equilibrio termodinamico. \\
+
+\subsection{Esperimento di Hanbury Brown e Twiss}
+L'esperimento tipico di misura delle correlazioni del secondo ordine utilizza un interferometro Brown-Twiss. Consideriamo due rivelatori $R_1$ ed $R_2$ posti a distanza $d$ variabile, in modo che possano entrare ed uscire dall'area di coerenza. Due contatori misurano in un certo intervallo temporale $N_1$ ed $N_2$ fotoni; il segnale  viene mandato ad un correlatore, che restituisce il prodotto
+
+\begin{equation}
+    \bar{c} = \langle(N_1-\bar{N}_1) (N_2-\bar{N}_2)\rangle
+\end{equation}
+Supponiamo di stare dentro l'area di coerenza, quindi $g$ è dato interamente da $T/\tau_c$. I fotoni sono bosoni, quindi vale
+
+\begin{equation}
+    \langle(N_i - \bar{N}_i)^2\rangle = N_i + \frac{\bar{N}_i^2}{g}
+\end{equation}
+e per $N = N_1 + N_2$
+
+\begin{equation}
+    \langle(N - \bar{N})^2\rangle = N + \frac{\bar{N}^2}{g}
+\end{equation}
+\begin{equation}
+    \langle(N_1+N_2 - \bar{N}_1 - \bar{N}_2)^2\rangle = \bar{N}_1 + \bar{N}_2 + \frac{(\bar{N}_1+\bar{N}_2)^2}{g}
+\end{equation}
+da cui arriviamo a un'espressione che ci dà accesso ad una stima di $g$:
+
+\begin{equation}
+    \bar{c} = \langle(N_1-\bar{N}_1) (N_2-\bar{N}_2)\rangle = \frac{\bar{N}_1\bar{N}_2}{g}
+\end{equation}
+Per particelle classiche, la correlazione è nulla; è un effetto puramente quantistico. Allo stesso modo, anche con un solo detector, si può misurare la correlazione temporale, data da
+
+\begin{equation}
+    \bar{c}(\tau) = \langle (N_1(t)-\bar{N}_1)(N_2(t+\tau)- \bar{N}_2 ) \rangle
+\end{equation}
+
+\subsection{Wiener-Chin\v{c}in e rumore termico}
+
+All'equilibrio termodinamico, mi aspetto che il movimento collettivo dei portatori di carica in un conduttori medi a zero. La differenza di potenziale termica residua misurata in assenza di campi esterni è dovuta a fluttuazioni statistiche date da
+
+\begin{equation}
+    \langle(\Delta V)^2\rangle = 4 R k_B T \,\Delta f
+    \label{rumore johnson}
+\end{equation}
+dove $\Delta f$ è la larghezza di banda che misuriamo. \\
+Una linea di trasmissione lunga $L$, chiusa con due resistenze uguali $R$ e con un ramo a terra, irradia per effetto Joule la potenza che le arriva dal campo elettromagnetico che sente. I modi equispaziati del campo sono dati da 
+
+\begin{equation}
+    L = n \frac{\lambda}{2}\qquad \lambda = \frac{h}{f}
+\end{equation}
+\begin{equation}
+    f = \frac{c}{2l}\,n
+\end{equation}
+Misurando con un'ampiezza $\Delta f$ vedo $2 l \Delta f/c $ modi. All'equilibrio termico ogni modo avrà un'energia termica data da 
+
+\begin{equation}
+    \bar{E} = h f \bar{n} = \frac{h f}{\exp(h f/k_B T)-1}
+\end{equation}
+Sviluppando per basse frequenze ($h f \ll k_B T$) otteniamo $E \sim k T$. L'energia media associata a tutti i modi entro la larghezza di banda sarà
+
+\begin{equation}
+    \bar{E}_{\Delta f} = k_B T \,\frac{2l}{c}\,\Delta f
+\end{equation}
+Ciascuna delle due resistenze riceve la metà dell'energia in un tempo $l/c$; la potenza che arriva ad ogni resistenza è data quindi da
+
+\begin{equation}
+    P_{\Delta f} = k_B T \Delta f
+\end{equation}
+e sarà riemessa per effetto Joule come
+
+\begin{equation}
+    R I^2 = \frac{\bar{V}^2}{4R} = k_B T \Delta f
+\end{equation}
+e così riotteniamo l'espressione \eqref{rumore johnson} secondo il ragionamento fatto da Nyquist la prima volta che si discusse del rumore Johnson. \\
+Vediamo come connettere questo fatto con le proprietà microscopiche del gas di elettroni. Consideriamo un potenziale $V(t)$ che fluttua nel tempo, misurato per un tempo $T$; possiamo svilupparlo in serie di Fourier:
+
+\begin{equation}
+    V(t) = \sum_{n=1}^{\infty} \left(a_n \cos(2\pi f_n t) + b_n \cos(2\pi f_n t)\right) \quad \text{con}\quad f_n = \frac{n}{T}
+\end{equation}
+Indicherò con il trattino la media temporale, e con le parentesi angolate la media statistica sull'ensemble di misure. La potenza dissipata per componente spettrale da un generico elemento resistivo è data da
+
+\begin{equation}
+\begin{split}
+    P_n & = \frac{1}{R}\overline{\left(a_n \cos(2\pi f_n t) + b_n \cos(2\pi f_n t)\right)^2} \\
+    & = \frac{a_n^2+b_n^2}{2R}
+    \end{split}
+\end{equation}
+e mediando su tante misure
+
+\begin{equation}
+    \langle P_n \rangle = \frac{\langle a_ n\rangle + \langle b_ n\rangle}{2R}
+\end{equation}
+Componenti con $n$ diversi contribuiscono tutti in maniera indipendente (tutti i doppi prodotti mediano a zero), quindi la potenza dissipata complessiva è data da
+
+\begin{equation}
+    \frac{\overline{\langle V^2(t)\rangle}}{R} = \sum_n \langle P_n \rangle = \frac{1}{R} \sum_n  \frac{\langle a_ n\rangle + \langle b_ n\rangle}{2}
+\end{equation}
+che può essere riscritta introducendo una densità spettrale in potenza come
+
+\begin{equation}
+  \frac{\overline{\langle V^2(t)\rangle}}{R}  = \sum_n G(f_n) \,\Delta f
+\end{equation}
+Per arrivare alla forma esplicita della densità spettrale scriviamo in trasformata di Fourier su un intervallo di campionamento $T$ una qualsiasi grandezza dipendente dal tempo:
+
+\begin{equation}
+    x(t) = \int_{-\infty}^{+\infty} \mathrm{d}f \,\tilde{x}_T(f)\,e^{2\pi i f t}
+\end{equation}
+$x(t)$ è non nulla solo su un intervallo $[-T/2, T/2]$. Se $x$ è reale il modulo quadro della trasformata è pari e per il teorema di Parseval possiamo scrivere
+
+\begin{equation}
+    \int_{-T/2}^{T/2} x^2(t) \,\mathrm{d}t = \int_{-\infty}^{+\infty} |\tilde{x}_T|^2 \,\mathrm{d}f = 2 \int_{0}^{+\infty} |\tilde{x}_T|^2 \,\mathrm{d}f
+\end{equation}
+Il valor medio nel tempo di $x^2$ è definito come
+
+\begin{equation}
+    \overline{x^2} = \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} x^2(t) \,\mathrm{d}t = \lim_{T\to\infty} \frac{2}{T}  \int_{0}^{+\infty} |\tilde{x}_T|^2 \,\mathrm{d}f
+\end{equation}
+Mediamo anche sull'ensemble:
+
+\begin{equation}
+    \langle \overline{x^2} \rangle = \int_{0}^{+\infty} \lim_{T\to\infty} \frac{2}{T}   \langle|\tilde{x}_T|^2\rangle \,\mathrm{d}f = \int_{0}^{\infty} G(f) \,\mathrm{d}f
+\end{equation}
+Riscriviamo la funzione di correlazione temporale come
+
+\begin{equation}
+\begin{split}
+    c(\tau) & = \left\langle \overline{x(t)\,x(t+\tau) } \right\rangle \\
+    & = \left\langle \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} x(t)\,x(t+\tau) \,\mathrm{d}t \right\rangle \\
+    & = \left\langle \lim_{T\to\infty} \frac{1}{T} \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty}  \int_{-T/2}^{T/2} \tilde{x}_T(f)\,e^{2\pi i f t}\,\tilde{x}_T(f') \,e^{2\pi i f' (t+\tau)}\,\mathrm{d}f\,\mathrm{d}f'\,\mathrm{d}t \right\rangle \\
+    & =  \left\langle\lim_{T\to\infty} \frac{1}{T}  \int_{-\infty}^{+\infty} \mathrm{d}f'\,e^{2\pi i f' \tau} \int_{-\infty}^{+\infty} \mathrm{d}f\, \tilde{x}_T(f)\tilde{x}_T(f')\int_{-T/2}^{T/2}\mathrm{d}t\, e^{2\pi i (f+f')t} \right\rangle \\
+\end{split}
+\end{equation}
+L'ultimo integrale tende alla delta di Dirac, quindi possiamo integrare e scrivere
+
+\begin{equation}
+    \begin{split}
+    c(\tau) & = \left\langle\lim_{T\to\infty} \frac{1}{T}  \int_{-\infty}^{+\infty} \mathrm{d}f\, \tilde{x}_T(f)\tilde{x}_T(-f)e^{2\pi i f \tau} \right\rangle \\ 
+    & = \left\langle\lim_{T\to\infty} \frac{2}{T}  \int_{0}^{+\infty} \mathrm{d}f\, |\tilde{x}_T(f)|^2 \cos(2\pi f \tau) \right\rangle \\
+\end{split}
+\end{equation}
+Questo è il teorema di di Wiener-Chin\v{c}in: la densità spettrale di energia di un segnale coincide con la coseno-trasformata della funzione di autocorrelazione del segnale stesso.\\
+Tipicamente l'autocorrelazione per sistemi che sono sottoposti a perdita di coerenza nell'evoluzione temporale è supposta comportarsi come
+
+\begin{equation}
+    c(\tau) = c(0)\,e^{-\tau/\tau_c}
+\end{equation}
+da cui
+
+\begin{equation}
+    G(f) = 4 \int_{0}^{\infty} c(0)\,e^{-\tau/\tau_c}\cos(2\pi f \tau) \,\mathrm{d}\tau = \frac{4 c(0) \tau_c}{1+(2\pi f \tau_c)^2}
+\end{equation}
+che è in prima approssimazione costante fino a frequenze dell'ordine di $1/2\pi\tau_c$ e trascurabile sopra. \\
+Torniamo al rumore Johnson: supponiamo di avere un filo che contiene $N = Sln$ elettroni (area $\times$ lunghezza $\times$ densità). La corrente è
+
+\begin{equation}
+    J = \frac{e^2 n \tau_c}{m} E
+\end{equation}
+mentre la resistenza è
+
+\begin{equation}
+    R = \frac{l}{\sigma_s} = \frac{l m}{n e^2 \tau_c S}
+\end{equation}
+La differenza di potenziale è 
+
+\begin{equation}
+    V = R S J = R S n \,e v_x = \frac{R e}{l} \sum_{i=1}^N \langle\Delta v_{x,i}\rangle_{(f, f+\Delta f)}
+\end{equation}
+Per la funzione di autocorrelazione assumo la forma
+
+\begin{equation}
+    c(\tau) = \overline{\langle v_{x,i}(t)\,v_{x,i}(t+\tau) \rangle} \impongo v^2_{x,i} \,e^{-\tau/\tau_c}
+\end{equation}
+Applicando il teorema di Wiener-Chin\v{c}in e usando il teorema di equipartizione, trovo
+
+\begin{equation}
+    G_i = \frac{4 \langle v^2_{x,i} \rangle \,\tau_c}{1+{2\pi f\tau_c}} \approx 4 \frac{k_B T}{m}\,\tau_c
+\end{equation}
+Per $f\tau_c \ll 1$ la distribuzione in potenza è costante in frequenza (spettro bianco), per cui possiamo scrivere per le fluttuazioni quadratiche della velocità nel range di frequenze $(f, f+\Delta f)$
+
+\begin{equation}
+    \langle\Delta v_{x,i}\rangle_{(f, f+\Delta f)} \approx G_i \Delta f 
+\end{equation}
+Mettendo tutto insieme, ottengo per le fluttuazioni quadratiche nella tensione il valore atteso:
+
+\begin{equation}
+    \overline{V^2_{\Delta f}} = \frac{R^2 e^2}{l^2}\sum_{i=1}^N 4 \frac{k_B T}{m} \,\tau_c\,\Delta f = 4 k_B T R \Delta f
+\end{equation}
+Il rumore termico è la perturbazione dominante quando si studiano le proprietà di trasporto di un conduttore. \\
+Nel caso di correnti estremamente piccole, si vede la natura discreta dei portatori di carica; in questo caso si parla di \textit{rumore shot}. In un tempo di misura $T$ la corrente è data da
+
+\begin{equation}
+    \langle I \rangle = \langle n \rangle \frac{e}{T}
+\end{equation}
+Le fluttuazioni nella corrente dipenderanno com'è ovvio dalla fluttuazioni nel numero di elettroni medio misurato. La probabilità di misurare $n$ elettroni in un intervallo $T$ suddiviso in $N$ intervallini uguali, con $N$ scelto in modo che in un intervallo $T/N$ possa misurarsi un solo elettrone con probabilità $p$, è data da
+
+\begin{equation}
+    P(n,T) = \binom{N}{n} \,p^n(1-p)^{N-n} 
+\end{equation}
+che per $p\ll1$, $N\gg 1$ può essere approssimata con una poissioniana:
+
+\begin{equation}
+    P(n,T) = \frac{\langle n\rangle^n}{n!}\,e^{-\langle n\rangle}\qquad \langle(\Delta n)^2\rangle = \langle n\rangle
+\end{equation}
+La densità spettrale del rumore shot è
+
+\begin{equation}
+    G(f) = 2 e \langle I \rangle
+\end{equation}
+A temperatura ambiente, il rumore shot è più significativo del Johnson se siamo in un regime in cui $\Delta V = R I > 2k_B T/e \sim 50 \,\,\text{mV}$. \\
+Il rumore shot per un fotorivelatore è previsto anche da un modello classico (ondulatorio) della luce;  il rivelatore infatti traduce l'intensità luminosa in elettroni, il che comporta una componente di \textit{shot noise} nel segnale che tradisce la natura particellare della luce.
+
+\chapter{Solidi}
+
+\section{Livelli elettronici in un cristallo}
+
+Per studiare un solido cristalllino, vorremmo innanzitutto scrivere la più generale e completa equazione di Schr\"odinger per i livelli elettronici e riuscire a trovare una soluzione. \\
+La parte classica e non relativistica dell'hamiltoniano deve contenere o contributo cinetico degli elettroni e dei nuclei e i termini di interazione coulombiana tra elettroni e nuclei:
+
+\begin{equation}
+    \begin{split}
+        H_0 & = T_e + T_N + V_{ee} + V_{NN} + V_{eN} \\
+        & = - \frac{\hbar^2}{2m} \sum_i \nabla^2_i - \frac{\hbar^2}{2M} \sum_I \nabla^2_I + \frac{1}{2}\sum_{i\neq j} \frac{e^2}{|\mathbf{r}_i-\mathbf{r}_j|} + \frac{1}{2}\sum_{I\neq J} \frac{Z_I Z_J e^2}{|\mathbf{R}_I-\mathbf{R}_J|} - \sum_{i, I} \frac{Z_I e^2}{|\mathbf{r}_i-\mathbf{R}_I|}
+    \end{split}
+\end{equation}
+Alcune correzioni relativistiche interessanti sono lo sviluppo al quart'ordine in $p$ della legge di dispersione, il contributo detto di \textit{zitterbewegung} che deriva dal fatto che la funzione d'onda dell'elettrone ha una sua estensione spaziale e non vede un potenziale puntuale, e il termine di interazione spin-orbita:
+
+\begin{equation}
+    H_{\text{rel}} = \sum_i \left[-\frac{|\mathbf{p}_i|^4}{2 m^3 c^2} + \frac{\hbar^2\nabla^2 V_{e,i}}{8 m^2 c^2}+\frac{\hbar}{4m^2 c^2} (\boldsymbol{\nabla} V_{e,i} \times \mathbf{p}_i)\cdot \boldsymbol{\sigma}_i\right]
+\end{equation}
+La più generale equazione di Schr\"odinger si scrive come
+
+\begin{equation}
+    H(\{\mathbf{r}_i\},\{\mathbf{R}_i\})\,\psi(\{\mathbf{r}_i\},\{\mathbf{R}_i\}) = E \,\psi(\{\mathbf{r}_i\},\{\mathbf{R}_i\}) 
+\end{equation}
+È chiaro ora che non possiamo andare avanti senza fare delle assunzioni fisiche che semplifichino il problema. Per cominciare ipotizziamo che la funzione d'onda fattorizzi come
+
+\begin{equation}
+    \psi(\{\mathbf{r}_i\},\{\mathbf{R}_i\}) = F(\{\mathbf{R}_i\}) \,\phi_n(\{\mathbf{r}_i\},\{\mathbf{R}_i\})
+\end{equation}
+e che le $\{\mathbf{R}_i\}$ appaiano nella $\phi_n$ come parametri, e non come variabili dinamiche. Quest'approssimazione è detta di Born-Oppenheimer ed è basata sul fatto che i nuclei, molto più pesanti degli elettroni, siano approssimabili come fermi nella risoluzione delle equazioni per il moto degli elettroni stessi.\\ In questa ipotesi vale
+
+\begin{equation}
+    \nabla^2_{\mathbf{R}}\psi = \phi_n \nabla^2_{\mathbf{R}}F + 2 \nabla_{\mathbf{R}}\phi_n \cdot \nabla_{\mathbf{R}} F + F \nabla^2_{\mathbf{R}}\phi_n = \phi_n \nabla^2_{\mathbf{R}}F
+\end{equation}
+e l'equazione di Schr\"odinger si può scrivere in una forma vagamente più semplice (rinuncio alle graffe per alleggerire la notazione):
+
+\begin{equation}
+\begin{split}
+& -\frac{\hbar^2}{2m} F(\mathbf{R}) \nabla^2_{\mathbf{r}}\phi_n(\mathbf{R},\mathbf{r}) + (V_{ee} + V_{eN} + H_{\text{rel}} )\,F(\mathbf{R})\,\phi_n(\mathbf{R}. \mathbf{r}) + \\
+& -\frac{\hbar^2}{2M} \phi_n(\mathbf{R},\mathbf{r}) \nabla^2_{\mathbf{R}} F(\mathbf{R}) + V_{NN} \,F(\mathbf{R})\,\phi_n(\mathbf{R}. \mathbf{r}) = E \,F(\mathbf{R})\,\phi_n(\mathbf{R}. \mathbf{r})
+\end{split}
+\end{equation}
+Divido tutto per la funzione d'onda totale $\psi$:
+
+\begin{equation}
+    -\frac{\hbar^2}{2m}\frac{\nabla^2_{\mathbf{r}}\phi_n}{\phi_n} + V_{ee} + V_{eN} + H_{\text{rel}}  -\frac{\hbar^2}{2M}\frac{\nabla^2_{\mathbf{R}}F(\mathbf{R})}{F(\mathbf{R})} + V_{NN} = E
+\end{equation}
+Dal momento che siamo in approssimazione B-O, il termine che contiene $F(\mathbf{R})$ e il potenziale di interazione tra i nuclei $V_{NN}$ possono essere assorbiti nell'autoenergia effettiva:
+
+\begin{equation}
+    -\frac{\hbar^2}{2m}\frac{\nabla^2_{\mathbf{r}}\phi_n}{\phi_n} + V_{ee} + V_{eN} + H_{\text{rel}} = E_n(\mathbf{R})
+\end{equation}
+Ogni set $\{\mathbf{R}_i\}$ definisce un'energia per i livelli elettronici. Trovate le autoenergie, possiamo scrivere l'equazione di Schr\"odinger per i nuclei, che possiamo risolvere per le posizioni di equilibrio, l'energia di coesione del cristallo e le energie dei modi vibrazionali normali:
+
+\begin{equation}
+    -\frac{\hbar^2}{2M}\frac{\nabla^2_{\mathbf{R}}F(\mathbf{R})}{F(\mathbf{R})} + V_{NN} + E_n(\mathbf{R}) = E
+\end{equation}
+Scriviamo esplicitamente l'hamiltoniano che agisce sulla funzione d'onda elettronica:
+
+\begin{equation}
+    H = -\frac{\hbar^2}{2m}\sum_i\nabla^2_i\phi_n + \frac{1}{2}\sum_{i\neq j} \frac{e^2}{|\mathbf{r}_i-\mathbf{r}_j|} - \sum_{i, I} \frac{Z_I e^2}{|\mathbf{r}_i-\mathbf{R}_I|} + H_{\text{
+    rel}}
+    \label{h_cristallo}
+\end{equation}
+Nonostante le pesanti semplificazioni, non siamo ancora in condizioni di risolvere il sistema descritto da questo hamiltoniano. Per proseguire, assumiamo che gli elettroni siano indipendenti, i.e. che la funzione d'onda che descrive il moto collettivo degli elettroni fattorizzi sulle singole particelle:
+
+\begin{equation}
+    \phi_n(\mathbf{r}_1,\mathbf{r}_2,\cdots ,\mathbf{r}_n) \to \phi_1(\mathbf{r}_1)\phi_2(\mathbf{r}_2)\cdots \phi_n(\mathbf{r}_n)
+\end{equation}
+Dal momento che gli elettroni sono fermioni, non possiamo fattorizzare come vogliamo la funzione d'onda, ma dobbiamo scegliere una combinazione lineare di prodotti delle $\phi_i$ che sia totalmente antisimmetrica nello scambio delle particelle; questa combinazione si può scrivere efficacemente sotto forma di un cosiddetto \textit{determinante di Slater}:
+
+\begin{equation}
+    \phi_n(\mathbf{r}_1,\mathbf{r}_2,...,\mathbf{r}_n) = \frac{1}{\sqrt{n!}}
+\begin{vmatrix}
+\phi_1(\mathbf{r}_1) & \phi_1(\mathbf{r}_2)  & \cdots & \phi_1(\mathbf{r}_n) \\ 
+\phi_2(\mathbf{r}_1) & \phi_2(\mathbf{r}_2) & \cdots  & \phi_2(\mathbf{r}_n) \\
+\cdots  &\cdots  &  & \cdots  \\ 
+\phi_n(\mathbf{r}_1)  &\phi_n(\mathbf{r}_2) &  \cdots  & \phi_n(\mathbf{r}_n) 
+\end{vmatrix}
+\label{det di slater}
+\end{equation}
+Inseriamo l'espressione \eqref{det di slater} nella \eqref{h_cristallo} e trascuriamo le correzioni relativistiche per ottenere l'hamiltoniano di Hartree-Fock:
+
+\begin{equation}
+\begin{split}
+    H_{\text{HF}} \,\phi_i(\mathbf{r}) & = -\frac{\hbar^2}{2m}\nabla^2 \phi_i(\mathbf{r}) - \sum_I \frac{Z_I e^2}{|\mathbf{r}-\mathbf{R}_I|}  \\
+    & + \sum_{j\neq i} \int \frac{\phi_j^{*}(\mathbf{r}') \phi_j(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,\mathrm{d}^3r'\,\phi_i(\mathbf{r}) \\
+    & + \sum_{j\neq i} \int \frac{\phi_j^{*}(\mathbf{r}') \phi_i(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,\mathrm{d}^3r'\,\phi_j(\mathbf{r})
+\end{split}
+\end{equation}
+Nella prima riga c'è la parte cinetica e l'interazione coulombiana con i nuclei; il termine nella seconda riga, detto \textit{termine di Hartree}, rappresenta la parte puramente moltiplicativa dell'interazione coulombiana tra elettroni; l'ultimo termine, detto \textit{di scambio}, è molto più problematico, perché è un operatore integrale che contiene la stessa $\phi_i$ per cui vogliamo risolvere. Ci sono vari approcci per semplificare l'equazione, tra i quali il più semplice è la \textit{local density approximation}: si media il potenziale nel termine di scambio sommando su tutte le $\phi_i$ e normalizzando. In questo modo l'interazione coulombiana può essere sintetizzata in un potenziale $V(\mathbf{r})$ e l'equazione di Schr\"odinger per il singolo elettrone può essere riscritta in modo standard:
+
+\begin{equation}
+    -\frac{\hbar^2}{2m}\nabla^2 \phi_i(\mathbf{r}) + V(\mathbf{r})\phi_i(\mathbf{r}) = E_n\,\phi_i(\mathbf{r})
+    \label{schrodinger_cristallo}
+\end{equation}
+
+\section{Reticoli e teorema di Bloch}
+
+Nei solidi cristallini ideali, le posizioni di equilibrio degli atomi sono periodiche, e di conseguenza è periodico il potenziale di cui risentono gli elettroni. Possiamo scrivere
+
+\begin{equation}
+    V(\mathbf{r}+\mathbf{R}) = V(\mathbf{r})
+\end{equation}
+per un certo set di vettori
+
+\begin{equation}
+    \mathbf{R} = n_1 \mathbf{a}_1 + n_2\mathbf{a}_2 + n_3 \mathbf{a}_3
+\end{equation}
+dove gli $n_i$ sono numeri interi e i vettori $\mathbf{a}_i$ definiscono una \textit{cella unitaria}, definita come la più piccola struttura periodica identificabile nel cristallo. Il set $\{\mathbf{R}\}$ è detto \textit{reticolo di Bravais}. Non è detto che il reticolo di Bravais (in rosso) abbia la stessa forma del reticolo atomico (in nero), né che ogni cella unitaria contenga un singolo atomo; la grafite, a struttura esagonale, è un controesempio:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{reticolo.jpg}
+\end{figure}
+
+\newpage
+
+Per ogni reticolo di Bravais $\{\mathbf{R}\}$ si definisce il \textit{reticolo reciproco} come l'insieme di vettori
+
+\begin{equation}
+    \{\mathbf{K}\} \qquad \text{tali che}\qquad e^{i\mathbf{K}\cdot \mathbf{R}} = 1
+\end{equation}
+Ad esempio, per un reticolo cubico con
+
+\begin{equation}
+    \mathbf{a_i} = a_i \hat{\mathbf{x}}_i
+\end{equation}
+il reticolo reciproco è identificato da vettori
+
+\begin{equation}
+    \mathbf{b}_i = \frac{2\pi}{a_i} \hat{\mathbf{x}}_i
+\end{equation}
+Consideriamo l'equazione di Schr\"odinger \eqref{schrodinger_cristallo} con l'ipotesi di periodicità di $V(\mathbf{r})$. L'impulso $\mathbf{p}$ non è un buon numero quantico, perché l'hamiltoniano non commuta con tutte le traslazioni generate da $\mathbf{p}$ ma solo con un sottogruppo di traslazioni discrete definite dalla struttura reticolare. In altre parole, il potenziale periodico $V(\mathbf{r})$ accoppia onde piane con impulsi diversi; consideriamo lo scattering di elettroni su di un reticolo undimensionale:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{diffrazione.jpg}
+\end{figure}
+Gli elettroni entrano come onde piane di impulso $\mathbf{q}_0$ ed escono con impulso $\mathbf{q}$ uguale in norma a $\mathbf{q}_0$ ma in diversa direzione (diffusione elastica). La differenza di cammino ottico è data da
+
+\begin{equation}
+    \delta = a (\cos\alpha - \cos\alpha_0)
+\end{equation}
+con
+
+\begin{equation}
+    \cos \alpha = \frac{q_x}{|\mathbf{q}|}\qquad \cos\alpha_0 = \frac{q_{0,x}}{|\mathbf{q}_0|}
+\end{equation}
+Perché ci sia interferenza costruttiva, imponiamo che $\delta$ sia un multiplo della lunghezza d'onda degli elettroni, i.e. che per un certo intero $l$ valga
+
+\begin{equation}
+    \delta = \frac{\mathbf{a}\cdot \Delta\mathbf{q}}{|\mathbf{q}|} \impongo l\lambda \quad\implies\quad \Delta \mathbf{q} \cdot \mathbf{a} = 2 \pi l
+\end{equation}
+L'ultima equazione identifica il vettore $\Delta \mathbf{q}$ nel reticolo reciproco $\{\mathbf{K}\}$; è legittimo quindi ipotizzare che le soluzioni all'equazione \eqref{schrodinger_cristallo} siano combinazioni lineari di onde piane i cui impulsi differiscono per un vettore del reticolo reciproco. \\
+L'ansatz è formalizzato dal \textit{teorema di Bloch}: le soluzioni della \eqref{schrodinger_cristallo} si possono scrivere come
+
+\begin{equation}
+    \phi_{n,\mathbf{k}}(\mathbf{r}) = e^{i\mathbf{k}\cdot\mathbf{r}}\,u_{n,\mathbf{k}}(\mathbf{r})
+\end{equation}
+dove $u_{n,\mathbf{k}}$ è una \textit{funzione di Bloch} periodica sul reticolo:
+
+\begin{equation}
+    u_{n,\mathbf{k}}(\mathbf{r}+\mathbf{R}) = u_{n,\mathbf{k}}(\mathbf{r})
+\end{equation}
+ovvero
+
+\begin{equation}
+    \phi_{n,\mathbf{k}}(\mathbf{r}+\mathbf{R}) = e^{i\mathbf{k}\cdot \mathbf{R}}\, \phi_{n,\mathbf{k}}(\mathbf{r})
+\end{equation}
+Per dimostrare il teorema di Bloch, partiamo definendo un set di operatori che rappresentino le traslazioni discrete sul reticolo, per i quali vale
+
+\begin{equation}
+    [T_{\mathbf{R}}, H] = 0
+\end{equation}
+Per le autofunzioni simultanee di $H$ e $\{T_{\mathbf{R}}\}$ varrà
+
+\begin{equation}
+    T_{\mathbf{R}}\,\phi = C(\mathbf{R})\,\phi
+\end{equation}
+Gli operatori di traslazione godono della proprietà di composizione
+
+\begin{equation}
+    T_{\mathbf{R}} T_{\mathbf{R}'} =  T_{\mathbf{R}'} T_{\mathbf{R}} =  T_{\mathbf{R}+\mathbf{R}'}
+\end{equation}
+per cui anche gli autovalori si comporranno identicamente:
+
+\begin{equation}
+    C(\mathbf{R})C(\mathbf{R}') = C(\mathbf{R}+\mathbf{R}')
+\end{equation}
+quindi, senza perdere di generalità, possiamo scrivere gli autovalori come
+
+\begin{equation}
+    C(\mathbf{R}) = C(\mathbf{a}_1)^{n_1} C(\mathbf{a}_2)^{n_2} C(\mathbf{a}_3)^{n_3} = e^{i\mathbf{k}\cdot \mathbf{R}}
+\end{equation}
+con
+
+\begin{equation}
+    \mathbf{k} = x_1\mathbf{b}_1 + x_2\mathbf{b}_2 + x_3\mathbf{b}_3 
+\end{equation}
+
+\begin{equation}
+   \mathbf{b}_i\cdot \mathbf{a}_j = 2\pi\delta_{ij}\qquad C(\mathbf{a}_i) = e^{2\pi i x_i}
+\end{equation}
+Non resta che dimostrare che gli $x_i$ sono numeri reali. È immediato vederlo dalla condizione di periodicità sulle autofunzioni, che si scrive
+
+\begin{equation}
+    \phi(\mathbf{r} + N_i \mathbf{a}_i) = \phi(\mathbf{r})
+\end{equation}
+Ma per ipotesi vale
+
+\begin{equation}
+    \phi_{n,\mathbf{k}}(\mathbf{r} + N_i \mathbf{a}_i) = e^{i\mathbf{k} \cdot N_i \mathbf{a}_i} \phi_{n,\mathbf{k}}(\mathbf{r})
+\end{equation}
+Mettendo insieme:
+
+\begin{equation}
+    e^{i\mathbf{k} \cdot N_i \mathbf{a}_i} \phi_{n,\mathbf{k}}(\mathbf{r}) = \phi_{n,\mathbf{k}}(\mathbf{r}) 
+\end{equation}
+ovvero
+
+\begin{equation}
+    \mathbf{k}\cdot N_i \mathbf{a}_i = 2\pi l \quad \implies \quad x_i = \frac{m_i}{N_i}
+\end{equation}
+con $l$, $m_i$ interi. Il teorema è dimostrato. Gli impulsi permessi per le autofunzioni di $H$ e $\{T_{\mathbf{R}}\}$ sono un set approssimabile come continuo per $N_i$ grandi (cristalli $\sim$ infiniti) e valgono
+
+\begin{equation}
+    \mathbf{k} = \sum_{i=1}^{3} \frac{m_i}{N_i}\mathbf{b}_i
+\end{equation}
+\end{document}
